@@ -54,7 +54,7 @@
   display: block;
   text-align: center;
   margin: 0.5em 0.5em;
-
+  color: white;
   text-decoration: none;
 }
 
@@ -70,7 +70,7 @@
   background-color: #4CAF50;
 }
 
-.menu-item:hover {
+.menu-item:hover .header-user:hover {
   background-color: #111;
 }
 

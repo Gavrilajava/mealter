@@ -1,12 +1,24 @@
 import React, {useState} from 'react';
 import LogInForm from '../../components/LogInForm';
 import SignUpForm from '../../components/SignUpForm'
+import {connect} from 'react-redux'
 
+const Header = (props) => {
 
-const Header = () => {
+  const [showForm, setShowForm] = useState(false)
+  
 
-  const [showLoginForm, setShowLoginForm] = useState(false)
-  const [showSignUpForm, setShowSignUpForm] = useState(false)
+  const buttons = () => {
+      return(
+        <div>
+          <li onClick={() => setShowForm("login")}className = "header-user">Log in</li>
+          <li onClick={() => setShowForm("signup")}className = "header-user">Sign up</li>
+          {showForm==="login"?<LogInForm setShowForm = {setShowForm}/>:null}
+          {showForm==="signup"?<SignUpForm setShowForm = {setShowForm}/>:null}
+        </div>
+      )
+    
+  }
 
   return(
     <div>
@@ -18,16 +30,27 @@ const Header = () => {
         <li className = "header-item"><a className = "menu-item" href="/recipes">Recipes</a></li>
         <li className = "header-item"><a className = "menu-item" href="/grocery">Grocery List</a></li>
         <li className = "header-item"><a className = "menu-item" href="/about">About Me</a></li>
-        <button onClick={() => setShowLoginForm(!showLoginForm)}className = "header-user">Log in</button>
-        <button onClick={() => setShowSignUpForm(!showSignUpForm)}className = "header-user">Sign up</button>
-        {showLoginForm?<LogInForm setShowForm = {setShowLoginForm}/>:null}
-        {showSignUpForm?<SignUpForm setShowForm = {setShowSignUpForm}/>:null}
+        {props.user? <div className = "header-user">{props.user.name} </div>: buttons()}
       </ul>
 
     </div>
-  )
-
-  
+  )  
 }
 
-export default Header
+
+
+const mapStateToProps = (state) => {
+  return{
+    user: state.UserReducer.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    logIn: ((user) => dispatch({type: "login", user: user})), 
+    logOut: (() => dispatch({type: "logout"}) ) 
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
