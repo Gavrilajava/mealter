@@ -4,9 +4,9 @@ class AuthController < ApplicationController
 
 
   def create
-      user = User.find_by(name: params[:username])
+      user = User.find_by(name: params[:name])
       if user && user.authenticate(params[:password]) #.authenticate method to check password using bcrypt gem
-          render json: {username: user.name, token: encode_token({user_id: user.id})}
+          render json: {user: user.to_f, token: encode_token({user_id: user.id})}
       else
           render json: {error: "invalid username or password"}
       end
