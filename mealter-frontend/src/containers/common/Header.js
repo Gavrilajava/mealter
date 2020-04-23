@@ -30,7 +30,7 @@ const Header = (props) => {
         <li className = "header-item"><a className = "menu-item" href="/recipes">Recipes</a></li>
         <li className = "header-item"><a className = "menu-item" href="/grocery">Grocery List</a></li>
         <li className = "header-item"><a className = "menu-item" href="/about">About Me</a></li>
-        {props.user? <div className = "header-user">{props.user.name} </div>: buttons()}
+        {props.user? <div onClick= {props.logOut} className = "header-user">{props.user.name} </div>: buttons()}
       </ul>
 
     </div>
@@ -40,16 +40,11 @@ const Header = (props) => {
 
 
 const mapStateToProps = (state) => {
-  return{
-    user: state.UserReducer.user
-  }
+  return {user: state.UserReducer.user}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return{
-    logIn: ((user) => dispatch({type: "login", user: user})), 
-    logOut: (() => dispatch({type: "logout"}) ) 
-  }
+  return {logOut: (() => dispatch({type: "logout"}))}
 }
 
 

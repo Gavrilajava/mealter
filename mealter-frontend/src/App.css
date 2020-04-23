@@ -70,7 +70,7 @@
   background-color: #4CAF50;
 }
 
-.menu-item:hover .header-user:hover {
+.menu-item:hover {
   background-color: #111;
 }
 

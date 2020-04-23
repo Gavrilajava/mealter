@@ -24,9 +24,7 @@ const SignUpForm = (props) => {
       .then(res => res.json())
       .then(userInfo => {
         if (userInfo.token){
-          localStorage.username = userInfo.user.name
-          localStorage.token = userInfo.token
-          props.logIn(userInfo.user)
+          props.logIn(userInfo)
           props.setShowForm(false)
         }
       })
@@ -49,16 +47,11 @@ const SignUpForm = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  return{
-    user: state.UserReducer.user
-  }
+  return {user: state.UserReducer.user}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return{
-    logIn: ((user) => dispatch({type: "login", user: user})), 
-    logOut: (() => dispatch({type: "logout"}) ) 
-  }
+  return {logIn: ((auth) => dispatch({type: "login", auth: auth})), }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm)

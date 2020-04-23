@@ -14,13 +14,15 @@ export default function UserReducer(state = initialUser(),action){
 
   switch(action.type){
       case "login":
+          localStorage.username = action.auth.user.name
+          localStorage.token = action.auth.token
+          debugger
           return{
               ...state,
-              user: {
-                name: action.user.name
-              }
+              user: action.auth.user
           }
       case "logout":
+          localStorage.clear()
           return{
               ...state,
               user: false
