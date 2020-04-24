@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   post "/login", to: "auth#create"
   post '/users', to: "users#create"
-
+  get 'user/avatar', to: "users#avatar"
 end

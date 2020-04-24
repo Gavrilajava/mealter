@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
+    
     if user.valid?
       user.save
       render json: {user: user.to_f, token: encode_token({user_id: user.id})}, status: :created
@@ -13,10 +14,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def avatar
+    user = logged_in?
+    render json: {link: user.avatar_link}
+  end
+
   private
 
   def user_params
-    params.permit(:name, :password, :email)
+    params.permit(:name, :password, :email, :avatar)
   end
 
 end

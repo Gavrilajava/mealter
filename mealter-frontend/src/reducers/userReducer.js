@@ -27,6 +27,15 @@ export default function UserReducer(state = initialUser(),action){
               ...state,
               user: false
           }
+      case 'add_avatar':
+        return{
+          ...state,
+          user: {
+            ...state.user,
+            avatar: action.avatar
+          }
+        }
+
       default: 
           return state
   }

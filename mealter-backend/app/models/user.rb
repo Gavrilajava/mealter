@@ -4,7 +4,12 @@ class User < ApplicationRecord
 
   def to_f
     {
-      name: self.name
+      name: self.name,
+      avatar: Rails.application.routes.url_helpers.rails_blob_path(self.avatar, only_path: true)
     }
+  end
+
+  def avatar_link
+    Rails.application.routes.url_helpers.rails_blob_path(self.avatar, only_path: true)
   end
 end
