@@ -12,14 +12,14 @@ class ApplicationController < ActionController::API
     token = headers.split(" ")[1]
     begin
       user_id = JWT.decode(token, "veryverysecretpassphrase")[0]["user_id"]
-      user = User.find(user_id)
+      @user = User.find(user_id)
     rescue
-      user = nil
+      @user = nil
     end
-    if user
-      return user
+    if @user
+      return @user
     else
-      render json: {error: "You have to be logged in to get this"}
+      render json: {error: "You have to be logged in to get this"}, status: :unauthorized
     end
   end
 end

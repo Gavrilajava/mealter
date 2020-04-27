@@ -41,7 +41,6 @@ const SignUpForm = (props) => {
       
       <form onSubmit = {signUp} className = "authentication-form">
         <h1>Sign Up</h1>
-        {formValues.avatar? <img src = {formValues.avatar}/> : null}
         <input onChange= {changeForm} name = "name" type="text" placeholder="Username..."></input>
         <input onChange= {changeForm} name = "email" type="text" placeholder="Email..."></input>
         <ImageUploader

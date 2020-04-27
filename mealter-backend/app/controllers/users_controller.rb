@@ -8,6 +8,8 @@ class UsersController < ApplicationController
     
     if user.valid?
       user.save
+      member = FamilyMember.create(name: user.name, description: FamilyMember.init_desc, user: user)
+      member.avatar.attach(params[:avatar])
       render json: {user: user.to_f, token: encode_token({user_id: user.id})}, status: :created
     else
       render json: {error: "Failed to create a user"}, status: :not_acceptable
@@ -26,3 +28,4 @@ class UsersController < ApplicationController
   end
 
 end
+

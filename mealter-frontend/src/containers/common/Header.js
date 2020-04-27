@@ -10,7 +10,7 @@ const Header = (props) => {
   
   const avatar = () => {
     if (props.user.avatar){
-      return <img className="avatar" src = {`${backEndUrl}${props.user.avatar}`} />
+      return <img alt ="avatar" className="avatar" src = {`${backEndUrl}${props.user.avatar}`} />
     }
     else{
       fetch(`${backEndUrl}/user/avatar`,{

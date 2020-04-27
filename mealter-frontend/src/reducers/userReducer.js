@@ -16,7 +16,6 @@ export default function UserReducer(state = initialUser(),action){
       case "login":
           localStorage.username = action.auth.user.name
           localStorage.token = action.auth.token
-          debugger
           return{
               ...state,
               user: action.auth.user
