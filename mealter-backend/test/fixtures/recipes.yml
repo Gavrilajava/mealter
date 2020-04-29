@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mealdb_id: 1
+  name: MyString
+  category: MyString
+  area: MyString
+  instructions: MyString
+  picture: MyString
+  video: MyString
+
+two:
+  mealdb_id: 1
+  name: MyString
+  category: MyString
+  area: MyString
+  instructions: MyString
+  picture: MyString
+  video: MyString

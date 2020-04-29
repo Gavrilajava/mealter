@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :family_members
   has_one_attached :avatar
+  has_many :scheduled_recipes
   has_secure_password
 
   def to_f

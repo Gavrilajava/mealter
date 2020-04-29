@@ -4,7 +4,7 @@ const Home = () => {
   return(
     <div>
       <h1 className ="bigtext">
-        This is fucking Home Page
+        This is Home Page
       </h1>
     </div>
   )

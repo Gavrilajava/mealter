@@ -168,3 +168,82 @@ img {
   margin: 30px auto;
   padding: 1em 2em;
 }
+
+.recipeImage {
+  display: inline-block;
+  position: relative;
+  width: 400px;
+  margin: 3em;
+}
+
+.bigtext{
+  margin: 0.5em 2em;
+}
+
+.listItem{
+  border: 1px solid black;
+  border-radius: 7px;
+  padding: 0.5em;
+}
+
+.recipeStep {
+  background-color: lightgreen;
+}
+
+.checklist {
+  background-color: moccasin;
+}
+
+.doneStep {
+  background-color: darkgrey;
+}
+
+.ingredient {
+  background-color: lightpink;
+}
+
+.active {
+  background-color: lightseagreen;
+}
+
+.recipedesctiption {
+  display: inline-block;
+
+}
+
+.grocerylist {
+    display: inline-block;
+    width: 40vw;
+}
+
+.ingIcon{
+  position: relative;
+  display: inline-block;
+  width: 3em;
+}
+
+.smallCard{
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 7px;
+  padding: 0.5em;
+  width: 200px;
+}
+
+.smallImg {
+  display: block;
+  position: relative;
+  height: 2em;
+  margin: 0;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  width: 230px;
+  height: 60px;
+}

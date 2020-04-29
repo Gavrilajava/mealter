@@ -4,7 +4,7 @@ const About = () => {
   return(
     <div>
       <h1 className ="bigtext">
-        This is fucking About Page
+        This is About Page
       </h1>
     </div>
   )

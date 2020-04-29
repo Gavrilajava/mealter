@@ -56,11 +56,9 @@ const Header = (props) => {
         <li className = "header-item"><a className = "menu-item" href="/recipes">Recipes</a></li>
         <li className = "header-item"><a className = "menu-item" href="/family">Family</a></li>
         <li className = "header-item"><a className = "menu-item" href="/schedule">Schedule</a></li>
-        <li className = "header-item"><a className = "menu-item" href="/recipes">Recipes</a></li>
         <li className = "header-item"><a className = "menu-item" href="/grocery">Grocery List</a></li>
         <li className = "header-item"><a className = "menu-item" href="/about">About Me</a></li>
         {userData()}
-        {/* {props.user? <div onClick= {props.logOut} className = "header-user">{props.user.name} </div>: buttons()} */}
       </ul>
 
     </div>

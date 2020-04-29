@@ -64,16 +64,7 @@ const FamilyMember = (props) => {
 const throwError = (e) => {throw Error(`Request rejected with status ${e.status}`)}
 
 
-const mapStateToProps = (state) => {
-  return {family: state.FamilyReducer}
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    editFamily: ((family) => dispatch({type: "editFamily", family: family})),
-    setFamily: ((family) => dispatch({type: "setFamily", family: family}))
-  }
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FamilyMember)
+
+export default FamilyMember

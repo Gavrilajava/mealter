@@ -8,6 +8,7 @@ import Family from './containers/Family'
 import Schedule from './containers/Schedule'
 import Grocery from './containers/Grocery'
 import About from './containers/About'
+import RecipePage from './containers/RecipePage'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/schedule" render={(routerProps) => <Schedule {...routerProps} /> }/>
         <Route exact path="/grocery" render={(routerProps) => <Grocery {...routerProps} /> }/>
         <Route exact path="/about" render={(routerProps) => <About {...routerProps} /> }/>
+        <Route exact path="/recipe/:id" render={(routerProps) => <RecipePage {...routerProps} /> }/>
         
 
         {/* <Route path="/paintings/:id" component={PaintingInfo}/>  */}

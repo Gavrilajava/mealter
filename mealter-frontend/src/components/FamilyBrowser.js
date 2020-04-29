@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import FamilyMember from './FamilyMember'
 import {connect} from 'react-redux'
 import {backEndUrl} from '../constants'
 
 const FamilyBrowser = (props) => {
+
+  const [family, setFamily] = useState([])
 
   useEffect(() => {
     if (localStorage.token){
@@ -12,17 +14,11 @@ const FamilyBrowser = (props) => {
         headers:{Authorization: `Bearer ${localStorage.token}`}
       })
         .then(resp => resp.ok ? resp.json() : throwError(resp.status))
-        .then(backend => {
-      
-          console.log("backend: " + backend.family)
-          if(JSON.stringify(backend.family) !== JSON.stringify(props.family)){
-            props.setFamily(backend.family)
-          }
-        })
+        .then(backend => setFamily(backend.family))
         .catch(console.log)
     }
     return undefined
-  })
+  }, [])
 
   const addMember = () => {
     let newMember = {
@@ -40,9 +36,9 @@ const FamilyBrowser = (props) => {
       })
         .then(resp => resp.ok ? resp.json() : throwError(resp.status))
         .then(backend => {
-          debugger
-          console.log("backend: " + backend.family)
-          props.setFamily(backend.family)
+
+
+          setFamily(backend.family)
           
         })
         .catch(console.log)
@@ -50,7 +46,7 @@ const FamilyBrowser = (props) => {
     return undefined
   }
 
-  console.log("props before render: " + props.family)
+
   
   const addButton = () => {
     return(
@@ -65,7 +61,7 @@ const FamilyBrowser = (props) => {
 
   return(
     <div className = "browser">
-      {props.family.map((member) => <FamilyMember member_id = {member.id}/>)}
+      {family.map((member) => <FamilyMember family={family} editFamily = {setFamily} member_id = {member.id}/>)}
       {addButton()}
     </div>
   )
@@ -74,16 +70,6 @@ const FamilyBrowser = (props) => {
 const throwError = (e) => {throw Error(`Request rejected with status ${e.status}`)}
 
 
-const mapStateToProps = (state) => {
-  return {family: state.FamilyReducer}
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    editFamily: ((family) => dispatch({type: "editFamily", family: family})),
-    setFamily: ((family) => dispatch({type: "setFamily", family: family}))
-  }
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FamilyBrowser)
+export default FamilyBrowser

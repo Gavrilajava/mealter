@@ -11,6 +11,17 @@ Rails.application.routes.draw do
       post '/family', to: "family_members#create"
       patch '/family', to: "family_members#update"
       delete '/family', to: "family_members#delete"
+
+      get '/recipe/:id', to: "recipes#show"
+      get '/recipes', to: "recipes#index"
+
+      get '/scheduled', to: "schedule#index"
+      post '/scheduled', to: "schedule#create"
+      patch '/scheduled', to: "schedule#change"
+      delete '/scheduled/:id', to: "schedule#delete"
+
+      get '/grocery', to: "schedule#grocery"
+
     end
   end
 
