@@ -70,8 +70,10 @@ const RecipePage = (props) => {
     )
   }
   else {
-    return undefined
+    return null
   }
+
+
 
 
 

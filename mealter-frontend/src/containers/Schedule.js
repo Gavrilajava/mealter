@@ -7,7 +7,8 @@ const Schedule = () => {
   const [activeRecipe, setActive] = useState(false)
 
   const setTime = (e) => {
-    if (activeRecipe && !e.target.id.includes("Time")){
+    debugger
+    if (activeRecipe && e.target.tagName === "TD" && !e.target.id.includes("Time")){
       if (localStorage.token){
         fetch(`${backEndUrl}/api/v1/scheduled`,{
           method: "PATCH",
@@ -30,6 +31,7 @@ const Schedule = () => {
         }]
       )
     }
+    console.log(e.target)
   }
 
  

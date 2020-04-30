@@ -13,7 +13,7 @@ class RecipeIngredient < ApplicationRecord
     }
   end
 
-  def self.index
+  def self.to_index
     RecipeIngredient.all.includes(:recipe, :ingredient, :measurment_unit).map{ |ing|
       {
         id: ing.id,

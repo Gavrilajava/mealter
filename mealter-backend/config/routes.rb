@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
       get '/recipe/:id', to: "recipes#show"
       get '/recipes', to: "recipes#index"
+      get '/measurments', to: "recipes#measurments"
+      patch '/measurments', to: "recipes#change_ingredient"
 
       get '/scheduled', to: "schedule#index"
       post '/scheduled', to: "schedule#create"
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
       delete '/scheduled/:id', to: "schedule#delete"
 
       get '/grocery', to: "schedule#grocery"
+
 
     end
   end

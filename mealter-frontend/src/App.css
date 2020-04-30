@@ -231,6 +231,10 @@ img {
   width: 200px;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .smallImg {
   display: block;
   position: relative;

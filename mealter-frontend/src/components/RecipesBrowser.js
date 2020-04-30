@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import RecipeCard from './RecipeCard'
 import {backEndUrl} from '../constants'
+import FilterField from './FilterField'
 
 const RecipesBrowser = () => {
 
-  const [state, changeState] = useState({recipes: [], filter: null})
+  // const [state, changeState] = useState({recipes: [], filter: null})
+
+  const [recipes, changeRecipes] = useState([])
+  const [filter, changeFilter] = useState("")
 
   useEffect(() => {
     if (localStorage.token){
@@ -13,7 +17,8 @@ const RecipesBrowser = () => {
         headers:{Authorization: `Bearer ${localStorage.token}`}
       })
         .then(resp => resp.ok ? resp.json() : throwError(resp.status))
-        .then(backend => changeState({...state, recipes: backend}))
+        .then(backend => changeRecipes(backend))
+        // .then(backend => changeState({...state, recipes: backend}))
         .catch(console.log)
     }
     return undefined
@@ -21,22 +26,25 @@ const RecipesBrowser = () => {
 
 
 
-  const changeFilter = (e) => {
-    changeState({...state, filter: e.target.value})
+  // const changeFilter = (e) => {
+  //   changeState({...state, filter: e.target.value})
+  // }
+
+  const filterRecipes = () => {
+    if (filter.length === 0){
+      return recipes
+    }
+    else {
+      return recipes.filter(r => r.name.toLowerCase().includes(filter.toLowerCase()) || r.category.toLowerCase().includes(filter.toLowerCase()) || r.tags.join("").toLowerCase().includes(filter))
+    }
   }
 
-  const FilterField = () => {
-    return (
-      <div>
-        <input onChange = {changeFilter} value = {state.filter}></input>
-      </div>
-    )
-  }
+
 
   return(
     <div>
-      <FilterField/>
-      {state.recipes.map(recipe => <RecipeCard key = {recipe.id} recipe = {recipe}/>)}
+      <FilterField changeFilter = {changeFilter}/>
+      {filterRecipes().map(recipe => <RecipeCard key = {recipe.id} recipe = {recipe}/>)}
     </div>
   )
 
