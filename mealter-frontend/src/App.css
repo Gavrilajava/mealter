@@ -242,7 +242,7 @@ img {
   margin: 0;
 }
 
-table, th, td {
+/* table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
@@ -250,4 +250,188 @@ table, th, td {
 th, td {
   width: 230px;
   height: 60px;
+} */
+
+.wrapper { 
+  position: relative; 
+  padding-left: 20px;
+  top: 0; 
+  right: 0; 
+  bottom: 0; 
+  left: 0; 
+  background: linear-gradient(to bottom, #654F85, #7B5789) 
+}
+.food { position: relative }
+
+.food
+{
+  margin: 20px;
+  position: relative;
+  display: inline-block;
+  width: 350px;
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, .5);
+}
+
+.food > .cover
+{
+  position: relative;
+  height: 350px;
+  background: transparent center no-repeat;
+  background-size: 100% auto;
+  border-radius: 2px 2px 0 0;
+}
+
+.food > .cover > label
+{
+  position: absolute;
+  top: 22px;
+  left: -33px;
+  height: 33px;
+  padding: 0 30px 0 63px;
+  line-height: 33px;
+  vertical-align: middle;
+  font-family: sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #FFF;
+  text-shadow: 0 1px 2px #000;
+  background: rgba(136, 86, 168, .6);
+}
+
+.food > .cover > label > i
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.recipe_cat {
+  height: 33px;
+  font-size: 22px;
+  margin: 5px;
+}
+
+.food > .cover > label > i > svg
+{
+  margin: 8px;
+}
+
+.food > .cover > .download
+{
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 47px;
+  height: 47px;
+  background: rgba(51, 193, 210, .6);
+  border-radius: 100%;
+}
+
+.food > .cover > .download:hover { background: #33C1D2 }
+
+.food > .cover > .download > svg
+{
+  margin: 12px 10px 0;
+}
+
+.food > .info
+{
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 0 0 2px 2px;
+}
+
+.food > .info > .recipe
+{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background: #8856A8;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 0 0 0 2px;
+}
+
+.food > .info > .recipe:hover { background: #9967B9 }
+
+.food > .info > .recipe > i
+{
+  display: block;
+  margin: 0px 0 15px;
+}
+
+.food > .info > .content
+{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 120px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #888;
+}
+
+.go_recipe{
+  font-size: 3em;
+}
+
+.go_recipe:hover{
+  text-shadow: 2px 2px 4px black
+}
+
+.som{
+  background: darkslategray;
+}
+
+.food > .info > .content strong { font-weight: normal; color: #333 }
+.food > .info > .content .pad-right { padding-right: 20px }
+.food > .info > .content .border-right { border-right: 1px solid #D9D9D9 }
+.food > .info > .content .consumers img, .food > .info > .content .consumers span { display: inline-block; width: 32px; height: 32px; margin: 0 2px 0 0; line-height: 32px; vertical-align: middle; border-radius: 100% }
+.food > .info > .content .consumers span { margin: 0 }
+
+.food > .info > .content h1
+{
+  margin: 0 0 10px;
+  font-size: 26px;
+  font-weight: normal;
+  color: #333;
+}
+
+font{
+  
+}
+
+.recipe_promt{
+  display: block;
+  margin-top: 20px;
+}
+
+.recipe-title{
+  display: inline-block;
+  position: absolute;
+  bottom: 5px;
+  color: white;
+  font-size: 4em;
+  margin: auto;
+  text-align: right;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px black;
+  transition: text-shadow 0.1s linear;
+}
+
+.recipe-title:hover{
+  /* font-size: 3.5em; */
+  text-shadow: 6px 6px 12px black
 }

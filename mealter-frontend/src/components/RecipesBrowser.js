@@ -42,7 +42,7 @@ const RecipesBrowser = () => {
 
 
   return(
-    <div>
+    <div className= "wrapper">
       <FilterField changeFilter = {changeFilter}/>
       {filterRecipes().map(recipe => <RecipeCard key = {recipe.id} recipe = {recipe}/>)}
     </div>
