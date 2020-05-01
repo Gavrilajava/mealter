@@ -3,8 +3,12 @@ import LogInForm from '../../components/LogInForm';
 import SignUpForm from '../../components/SignUpForm'
 import {connect} from 'react-redux'
 import {backEndUrl} from '../../constants'
+import { useLocation } from 'react-router-dom'
 
 const Header = (props) => {
+  let location = useLocation()
+  let pointer = location.pathname.split('/')
+  !pointer[1]? pointer = "home" : pointer = pointer[1]
 
   const [showForm, setShowForm] = useState(false)
   
@@ -25,23 +29,22 @@ const Header = (props) => {
     }
   }
 
+  
+
   const userData = () => {
     if (props.user){
       return (
-      <div>
-        <li onClick= {props.logOut} className = "header-user">Log Out</li>
-        <li className = "header-user">
-          {avatar()}
-          {props.user.name}
-        </li>
+      <div className= "user-info">
+        <a href="/logout" onClick={props.logOut}>{props.user.name}</a>
+          {avatar()} 
       </div>
       )
     }
     else{
       return(
-        <div>
-          <li onClick={() => setShowForm("login")}className = "header-user">Log in</li>
-          <li onClick={() => setShowForm("signup")}className = "header-user">Sign up</li>
+        <div className= "user-info">
+          <p className="navlinks-right"  onClick={() => setShowForm("login")} >Log in</p>
+          <a  className="navlinks-right" href="/about" onClick={() => setShowForm("signup")}>Sign up</a>
           {showForm==="login"?<LogInForm setShowForm = {setShowForm}/>:null}
           {showForm==="signup"?<SignUpForm setShowForm = {setShowForm}/>:null}
         </div>
@@ -50,18 +53,19 @@ const Header = (props) => {
   }
 
   return(
-    <div>
-      <ul className = "header">
-        <li className = "header-item"><a className = "menu-item" href="/">Home</a></li>
-        <li className = "header-item"><a className = "menu-item" href="/recipes">Recipes</a></li>
-        <li className = "header-item"><a className = "menu-item" href="/family">Family</a></li>
-        <li className = "header-item"><a className = "menu-item" href="/schedule">Schedule</a></li>
-        <li className = "header-item"><a className = "menu-item" href="/grocery">Grocery List</a></li>
-        <li className = "header-item"><a className = "menu-item" href="/about">About Me</a></li>
-        {userData()}
-      </ul>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/recipes">Recipes</a>
+      <a href="/family">Family</a>
+      <a href="/schedule">Schedule</a>
+      <a href="/grocery">Grocery List</a>
+      <a href="/about">About Me</a>
+      <div className={`animation start-${pointer}`}></div>
 
-    </div>
+      {userData()}
+
+
+    </nav>
   )  
 }
 

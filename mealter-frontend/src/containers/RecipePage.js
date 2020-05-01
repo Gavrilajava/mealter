@@ -7,16 +7,15 @@ const RecipePage = (props) => {
   // props.match.params.id
   const [recipe, changeRecipe] = useState(false)
 
+ 
   useEffect(() => {
-    if (localStorage.token){
-      fetch(`${backEndUrl}/api/v1/recipe/${props.match.params.id}`,{
-        method: "GET",
-        headers:{Authorization: `Bearer ${localStorage.token}`}
-      })
-        .then(resp => resp.ok ? resp.json() : throwError(resp.status))
-        .then(backend => changeRecipe(backend))
-        .catch(console.log)
-    }
+    fetch(`${backEndUrl}/api/v1/recipe/${props.match.params.id}`,{
+      method: "GET",
+      // headers:{Authorization: `Bearer ${localStorage.token}`}
+    })
+      .then(resp => resp.ok ? resp.json() : throwError(resp.status))
+      .then(backend => changeRecipe(backend))
+      .catch(console.log)
     return undefined
   }, [])
 

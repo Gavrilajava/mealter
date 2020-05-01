@@ -14,25 +14,19 @@ import EditRecipeIngredients from './containers/EditRecipeIngredients'
 function App() {
   return (
     <BrowserRouter>
-     <div>
-      <Header/>
-      <Switch>
-
-        <Route exact path="/" render={(routerProps) => <Home {...routerProps} /> }/>
-        <Route exact path="/recipes" render={(routerProps) => <Recipes {...routerProps} /> }/>
-        <Route exact path="/family" render={(routerProps) => <Family {...routerProps} /> }/>
-        <Route exact path="/schedule" render={(routerProps) => <Schedule {...routerProps} /> }/>
-        <Route exact path="/grocery" render={(routerProps) => <Grocery {...routerProps} /> }/>
-        <Route exact path="/about" render={(routerProps) => <About {...routerProps} /> }/>
-        <Route exact path="/edit" render={(routerProps) => <EditRecipeIngredients {...routerProps} /> }/>
-        <Route exact path="/recipe/:id" render={(routerProps) => <RecipePage {...routerProps} /> }/>
-        
-
-        {/* <Route path="/paintings/:id" component={PaintingInfo}/>  */}
-      
-      </Switch>
- 
-    </div>
+      <div className= "wrapper">
+        <Header/>
+        <Switch>
+          <Route exact path="/" render={(routerProps) => <Home {...routerProps} /> }/>
+          <Route exact path="/recipes" render={(routerProps) => <Recipes {...routerProps} /> }/>
+          <Route exact path="/family" render={(routerProps) => <Family {...routerProps} /> }/>
+          <Route exact path="/schedule" render={(routerProps) => <Schedule {...routerProps} /> }/>
+          <Route exact path="/grocery" render={(routerProps) => <Grocery {...routerProps} /> }/>
+          <Route exact path="/about" render={(routerProps) => <About {...routerProps} /> }/>
+          <Route exact path="/edit" render={(routerProps) => <EditRecipeIngredients {...routerProps} /> }/>
+          <Route exact path="/recipes/:id" render={(routerProps) => <RecipePage {...routerProps} /> }/>
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }

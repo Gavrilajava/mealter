@@ -3,8 +3,9 @@ import React, {useEffect, useState} from 'react'
 const FilterField = (props) => {
 
   return (
-    <div>
-      <input onChange = {(e) => props.changeFilter(e.target.value.toLowerCase())}></input>
+    <div className='filter-container'>
+      <label className="title">Type something to filter:</label>
+      <input className = 'filter' onChange = {(e) => props.changeFilter(e.target.value.toLowerCase())}></input>
     </div>
   )
 }
