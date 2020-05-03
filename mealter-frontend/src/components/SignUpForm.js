@@ -1,13 +1,29 @@
-import React, {useState}  from 'react'
+import React, {useState, useEffect}  from 'react'
 import {backEndUrl} from '../constants'
 import {connect} from 'react-redux'
 import ImageUploader from 'react-images-upload';
 
 const SignUpForm = (props) => {
 
-  const [formValues, setFormValues] = useState({})
+  
 
-  const closeForm = (e) => e.target.className === 'blured-background'?props.setShowForm(false):null
+  useEffect(() => {
+    let content = document.querySelector("div.centered")
+    content.className = "centered blur"
+  }, [])
+
+
+  
+  const closeForm = (e) => {
+    if (e.target.className === 'blured-background'){
+      let content = document.querySelector("div.centered")
+      content.className = "centered"
+      props.setShowForm(false)
+    
+    }
+  }
+
+  const [formValues, setFormValues] = useState({})
 
   const changeForm = (e) => setFormValues({...formValues, [e.target.name]: e.target.value})
 
@@ -38,24 +54,38 @@ const SignUpForm = (props) => {
 
   return(
     <div onClick = {closeForm} className = "blured-background">
-      
-      <form onSubmit = {signUp} className = "authentication-form">
-        <h1>Sign Up</h1>
-        <input onChange= {changeForm} name = "name" type="text" placeholder="Username..."></input>
-        <input onChange= {changeForm} name = "email" type="text" placeholder="Email..."></input>
-        <ImageUploader
-                withIcon={true}
-                singleImage = {true}
-                buttonText='Choose image'
-                onChange={onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-            />
-        {/* <input id = "avatar" name = "avatar" type="file" placeholder="UserPic"></input> */}
-        <input onChange= {changeForm} name = "password" type="password" placeholder="Password..."></input>
-        <input onChange= {changeForm} name = "password_confirmation" type="password" placeholder="Password..."></input>
-        <input type="submit" value = "Sign Up"></input>
-      </form>
+      <div className = "auth-bgrnd signup  anim-600">
+        <form onSubmit = {signUp} className = "authentication-form signup">
+          <h3>Hello, please sign up:</h3>
+          <label for="name">User image (can be omitted):</label>
+          <ImageUploader
+                  className = "image-uploader"
+                  buttonClassName = 'submit'
+                  withIcon={true}
+                  name='image'
+                  withLabel = {true}
+                  withPreview = {true}
+                  singleImage = {true}
+                  buttonText='Choose image'
+                  onChange={onDrop}
+                  imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
+                  maxFileSize={5242880} 
+                  fileSizeError = "Whoa, take it easy! This picture is too big!"
+                  fileTypeError = "Sorry, this file type is not supported"
+              />
+          <label for="name">Username:</label>
+          <input onChange= {changeForm} name = "name" type="text" placeholder="Username..."></input>
+          <label for="name">Email (Just in case you forget your password):</label>
+          <input onChange= {changeForm} name = "email" type="text" placeholder="Email..."></input>
+          <label for="password">Password:</label>
+          <input onChange= {changeForm} name = "password" type="password" placeholder="Password..."></input>
+          <label for="password">Type it again please:</label>
+          <input onChange= {changeForm} name = "password_confirmation" type="password" placeholder="Password..."></input>
+          
+          <button type="submit">Sign up</button>
+        </form>
+        <div className="auth-left signup  anim-600-left"></div>
+      </div>
     </div>
   )
 }

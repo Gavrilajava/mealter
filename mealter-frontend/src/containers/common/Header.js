@@ -44,7 +44,7 @@ const Header = (props) => {
       return(
         <div className= "user-info">
           <p className="navlinks-right"  onClick={() => setShowForm("login")} >Log in</p>
-          <a  className="navlinks-right" href="/about" onClick={() => setShowForm("signup")}>Sign up</a>
+          <p className="navlinks-right"  onClick={() => setShowForm("signup")} >Sign up</p>
           {showForm==="login"?<LogInForm setShowForm = {setShowForm}/>:null}
           {showForm==="signup"?<SignUpForm setShowForm = {setShowForm}/>:null}
         </div>

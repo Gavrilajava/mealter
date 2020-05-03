@@ -1,12 +1,26 @@
-import React, {useState}  from 'react'
+import React, {useState, useEffect}  from 'react'
 import {backEndUrl} from '../constants'
 import {connect} from 'react-redux'
 
 const LogInForm = (props) => {
 
-  const [formValues, setFormValues] = useState({})
+  useEffect(() => {
+    let content = document.querySelector("div.centered")
+    content.className = "centered blur"
+  }, [])
+
+
   
-  const closeForm = (e) => e.target.className === 'blured-background'?props.setShowForm(false):null
+  const closeForm = (e) => {
+    if (e.target.className === 'blured-background'){
+      let content = document.querySelector("div.centered")
+      content.className = "centered"
+      props.setShowForm(false)
+    
+    }
+  }
+
+  const [formValues, setFormValues] = useState({})
 
   const changeForm = (e) => setFormValues({...formValues, [e.target.name]: e.target.value})
 
@@ -33,12 +47,17 @@ const LogInForm = (props) => {
   
   return(
     <div onClick = {closeForm} className = "blured-background">
-      <form onSubmit = {logIn} className = "authentication-form">
-        <h1>Log in</h1>
-        <input onChange= {changeForm} type="text"  name = "name" placeholder="Username..."></input>
-        <input onChange= {changeForm} type="password" name = "password" placeholder="Password..."></input>
-        <input type="submit" value = "Log in"></input>
-      </form>
+      <div className = "auth-bgrnd login anim-400">
+        <form onSubmit = {logIn} className = "authentication-form login">
+          <h1>Hello, friend, Welcome again</h1>
+          <label for="name">Username:</label>
+          <input onChange= {changeForm} type="text"  name = "name" placeholder="Username..."></input>
+          <label for="password">Password:</label>
+          <input onChange= {changeForm} type="password" name = "password" placeholder="Password..."></input>
+          <button type="submit">Log in</button>
+        </form>
+        <div className="auth-left login anim-400-left"></div>
+      </div>
     </div>
   )
 
