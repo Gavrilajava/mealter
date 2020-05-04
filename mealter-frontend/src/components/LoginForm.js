@@ -38,6 +38,8 @@ const LogInForm = (props) => {
       .then(userInfo => {
         if (userInfo.token){
           props.logIn(userInfo)
+          let content = document.querySelector("div.centered")
+          content.className = "centered"
           props.setShowForm(false)
         }
       })

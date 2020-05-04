@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 
+
 const Editable = (props) => {
 
   const [state, changeState] = useState({
@@ -30,14 +31,19 @@ const Editable = (props) => {
     })
   }
 
+  let setFontSize
+  props.fontSize ? setFontSize = {fontSize: props.fontSize} : setFontSize = null
+
   return(
     state.editable
-      ? <input onBlur={handleOnBlur} onChange={handleChange} value = {state.value}></input>
-      : <p onClick={makeEditable} >{state.value}</p>
+
+      ? <textarea wrap="soft" className = {props.className} style = {setFontSize} onBlur={handleOnBlur} onChange={handleChange} value = {state.value}></textarea>
+      : <p className = {props.className} style = {setFontSize} onClick={makeEditable} >{state.value}</p>
 
   )
 }
 
+{/* <textarea name="text" rows="14" cols="10" wrap="soft"> </textarea> */}
 
 
 

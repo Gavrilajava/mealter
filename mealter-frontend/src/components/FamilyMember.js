@@ -2,6 +2,7 @@ import React from 'react'
 import {backEndUrl} from '../constants'
 import {connect} from 'react-redux'
 import Editable from './Editable'
+import fontSizeFromTitle from './fontSizeFromTitle'
 
 const FamilyMember = (props) => {
 
@@ -12,8 +13,7 @@ const FamilyMember = (props) => {
       ...member,
       [obj.name]: obj.value
     }
-
-    props.editFamily(props.family.filter(m => m.id !== props.member_id).concat(new_member))
+    props.editFamily(props.family.filter(m => m.id !== props.member_id).concat(new_member).sort((a,b) => a.id - b.id))
     if (localStorage.token){
       fetch(`${backEndUrl}/api/v1/family`,{
         method: "PATCH",
@@ -30,32 +30,71 @@ const FamilyMember = (props) => {
   }
 
   const deleteMember = () => {
-    let newFamily = props.family.filter(m => m.id !== props.member_id)
-    props.editFamily(newFamily)
-    if (localStorage.token){
-      fetch(`${backEndUrl}/api/v1/family`,{
-        method: "DELETE",
-        headers:{
-          Authorization: `Bearer ${localStorage.token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({member: member})
-      })
-        .then(resp => resp.ok ? resp.json() : throwError(resp.status))
-        .catch(console.log)
+    if (document.querySelectorAll('textarea').length ===0){
+      let newFamily = props.family.filter(m => m.id !== props.member_id)
+      props.editFamily(newFamily)
+      if (localStorage.token){
+        fetch(`${backEndUrl}/api/v1/family`,{
+          method: "DELETE",
+          headers:{
+            Authorization: `Bearer ${localStorage.token}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({member: member})
+        })
+          .then(resp => resp.ok ? resp.json() : throwError(resp.status))
+          .catch(console.log)
+      }
     }
   }
 
+  const createUrl = (userpic) => {
+    if (userpic[0] === '/'){
+      return  backEndUrl + userpic
+    }
+    else {
+      return '/images/family/' + userpic + '.jpg'
+    }
+  }
+
+  const changePicture = () => {
+    if (document.querySelectorAll('textarea').length ===0){
+      if (member.userpic[0] !== '/'){
+        let newPic
+        if (member.userpic === 'family8'){
+          newPic = 'family1'
+        }
+        else{
+          newPic = 'family' + (parseInt(member.userpic.slice(-1))+1)
+        }
+        changeState({name: "userpic", value: newPic})
+      }
+    }
+    return undefined
+  }
+
   return(
-    <div onDoubleClick = {deleteMember} className = "container">
-      <div className = "imgcont">
-          <img alt = "avatar" src = "/avatar-placeholder.png" />
-      </div>
-      <div className = "middle">
-        <h2> <Editable value = {member.name} name="name" changeState={changeState} />  </h2>
+    <div  className = "food">
+      <div  className="cover" style={{backgroundImage: 'url(' + createUrl(member.userpic) + ')'}}> 
+          {/* // onClick = {() => changePicture(member)} */}
+        <div onClick = {deleteMember} className = "fmIcom fmDelete"><i class="far fa-trash-alt"></i></div>
+        <div onClick = {() => changePicture(member)} className = "fmIcom fmChange"><i className="fas fa-arrow-right"></i></div>
+        <Editable 
+          value = {member.name} 
+          name="name" 
+          changeState={changeState} 
+          className="recipe-title" 
+          fontSize = {fontSizeFromTitle(member.name)}
+        /> 
+
       </div>
       <div className = "description">
-        <Editable value = {member.description} name="name" changeState={changeState} />
+        <Editable 
+          value = {member.description} 
+          name="description" 
+          changeState={changeState} 
+          className="memberDescription"
+        />
       </div>
     </div>
   )

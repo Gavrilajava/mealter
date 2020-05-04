@@ -20,7 +20,7 @@ class Api::V1::FamilyMembersController < ApplicationController
 
   def create
 
-    member = FamilyMember.create(name: new_member_params[:name], userpic: new_member_params[:userpic], user: @user, description: FamilyMember.init_desc)
+    member = FamilyMember.create(name: new_member_params[:name], userpic: 'family' + rand(1...8).to_s, user: @user, description: FamilyMember.stand_desc)
     
     render json: {family: @user.family}
   end

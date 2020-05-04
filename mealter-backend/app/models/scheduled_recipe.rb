@@ -13,6 +13,7 @@ class ScheduledRecipe < ApplicationRecord
       id: sched_recipe.id,
       name: sched_recipe.recipe.name,
       picture: sched_recipe.recipe.picture,
+      recipe_id: sched_recipe.recipe.id,
       date: sched_recipe.date,
       cooked: sched_recipe.cooked,
       ingredients_bought: sched_recipe.ingredients_bought

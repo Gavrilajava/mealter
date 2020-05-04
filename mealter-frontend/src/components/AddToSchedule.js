@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {backEndUrl} from '../constants'
 
 const AddToSchedule = (id) => {

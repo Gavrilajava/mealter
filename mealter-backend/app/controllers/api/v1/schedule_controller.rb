@@ -21,6 +21,14 @@ class Api::V1::ScheduleController < ApplicationController
     render json: ScheduledRecipe.to_frontend(@user)
   end
 
+  def delete
+    recipe = ScheduledRecipe.find(params[:id])
+    if recipe.user == @user
+      recipe.destroy
+    end
+    render json: ScheduledRecipe.to_frontend(@user)
+  end
+
   def grocery
     render json: ScheduledRecipe.grocery_list(@user)
   end

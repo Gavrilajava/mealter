@@ -7,7 +7,6 @@ const Schedule = () => {
   const [activeRecipe, setActive] = useState(false)
 
   const setTime = (e) => {
-    debugger
     if (activeRecipe && e.target.tagName === "TD" && !e.target.id.includes("Time")){
       if (localStorage.token){
         fetch(`${backEndUrl}/api/v1/scheduled`,{
@@ -50,6 +49,18 @@ const Schedule = () => {
         .catch(console.log)
     }
 
+  const deleteRecipe = (e) => {
+    let id = e.target.id
+    if (localStorage.token){
+      fetch(`${backEndUrl}/api/v1/scheduled/${id}`,{
+        method: "DELETE",
+        headers:{Authorization: `Bearer ${localStorage.token}`}
+      })
+        .then(resp => resp.ok ? resp.json() : throwError(resp.status))
+        .catch(console.log)
+    }
+    changeRecipes(recipes.filter(recipe => recipe.id !== id))
+  }
 
 
   const changeActive = (e) => {
@@ -63,10 +74,26 @@ const Schedule = () => {
   
 
   const renderRecipe = (recipe) => {
+    debugger
+    let className
+    let style
+    if (recipe.id == activeRecipe){
+      className = "smallCard active"
+      style= {boxShadow: "6px 6px 12px black", backgroundImage: 'url(' + recipe.picture + ')'}
+    }
+    else{
+      className = "smallCard"
+      style= {backgroundImage: 'url(' + recipe.picture + ')'}
+    }
     return(
-      <div id = {recipe.id} onClick = {changeActive} className = {recipe.id == activeRecipe? "smallCard active" : "smallCard"}>
-        <img src = {recipe.picture} alt = {recipe.name} className = "smallImg"></img>
-        <label>{recipe.name}</label>
+      <div 
+        id = {recipe.id} 
+        onClick = {changeActive} 
+        className = {className} 
+        style = {style}
+        >
+        <a href = {`/recipes/${recipe.recipe_id}`} id = {recipe.id} >{recipe.name}</a>
+        <div onClick = {deleteRecipe} className = "fmIcom fmDelete deleteIcon"><i class="far fa-trash-alt"></i></div>
       </div>
     )
   }
@@ -106,12 +133,21 @@ const Schedule = () => {
   }
 
   const renderCell = (data, id) => {
+    if (id.includes("Time")){
+      return(
+        <td className = "rowHeader" id= {id}>
+          {data}
+        </td>
+      )
+    }
+    else {
     return (
-      <td onClick = {setTime} id= {id}>
+      <td className = "cell" onClick = {setTime} id= {id}>
         {data}
         {isRecipe(id)}
       </td>
     )
+    }
   }
 
  
@@ -123,16 +159,21 @@ const Schedule = () => {
       columns[i+1].push(new Date((Date.now() + (60*60*24*1000*i))).toLocaleDateString())
     }
     return(
-      <table>
-            {columns[0].map((time, index) => index ===0 ? renderHeaders(columns) : renderRow(columns, index, time))}
+      <table className= "schedule">
+        <thead>
+          {renderHeaders(columns)}
+        </thead>
+        <tbody>
+            {columns[0].map((time, index) => index ===0 ? null : renderRow(columns, index, time))}
+        </tbody>
       </table>
     )
   }
 
   return(
-    <div>
-      <h1 className ="bigtext">
-        This is Schedule Page
+    <div className="centered">
+      <h1 className ="title">
+        This is Your Coocking Schedule:
       </h1>
       <div>
         {recipes.filter(recipe => recipe.date === null).map(recipe => renderRecipe(recipe))}

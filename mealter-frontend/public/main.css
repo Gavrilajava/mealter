@@ -411,12 +411,7 @@ img {
   margin: 1em auto auto 2em;
 }
 
-.description {
-  padding: 1em;
-  width: 18em;
-  height: 11vh;
-  font-size: 1.2em;
-}
+
 
 .browser {
   display: block;
@@ -457,9 +452,7 @@ img {
   background-color: lightpink;
 }
 
-.active {
-  background-color: lightseagreen;
-}
+
 
 .recipedesctiption {
   display: inline-block;
@@ -477,14 +470,7 @@ img {
   width: 3em;
 }
 
-.smallCard{
-  position: relative;
-  display: inline-block;
-  border: 1px solid black;
-  border-radius: 7px;
-  padding: 0.5em;
-  width: 200px;
-}
+
 
 .inline-block {
   display: inline-block;
@@ -517,7 +503,7 @@ th, td {
   /* background: linear-gradient(to bottom, #654F85, #7B5789); */
   
 }
-.food { position: relative }
+
 
 .centered{
   position: absolute;
@@ -694,6 +680,7 @@ th, td {
 }
 
 .recipe-title{
+  font-family: 'Roboto', sans-serif;
   display: inline-block;
   position: absolute;
   bottom: 0;
@@ -701,7 +688,7 @@ th, td {
   color: white;
   font-size: 4em;
   width: 350px;
-  
+  margin: auto;
   text-align: right;
   text-align-last: right;
   text-decoration: none;
@@ -730,4 +717,145 @@ th, td {
   position: relative;
   display: inline-block;
   width: 90%
+}
+
+.cover textarea {
+  height: 350px;
+  width: 350px;
+  background-color: transparent;
+  margin: auto 0 auto;
+  padding: 0;
+  border: none;
+  word-wrap: normal;
+  vertical-align: middle;
+}
+
+.kitchen1 {
+  background-image: url(/images/kitchen1.jpg);
+}
+
+.memberDescription{
+  width: 350px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 11vh;
+  font-size: 1.1em;
+}
+
+.description {
+  margin: 0;
+  padding: 0;
+  width: 350px;
+  height: 150px;
+  font-size: 1.1em;
+}
+
+.fmDelete{
+  right: 0;
+  z-index: 4;
+}
+
+.fmChange{
+  left:0;
+}
+
+.fmIcom{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  font-size: 50px;
+  background-size: contain;
+}
+
+
+
+.fmIcom:hover{
+  opacity: 1;
+}
+
+.schedule{
+  margin: 0px 30px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-image: url('/images/kitchen1.jpg');
+  background-size: cover;
+  border-collapse: collapse;
+}
+
+.schedule th {
+  border: 1px solid black;
+  height: 40px;
+  font-size: 32px;
+}
+
+.rowHeader{
+  border: 1px solid black;
+  width: 60px;
+  font-size: 24px;
+}
+
+.cell{
+  border: 1px solid black;
+  min-width: 218px;
+  height: 68px;
+}
+
+
+
+
+
+.smallCard{
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 0.5em;
+  min-height: 68px;
+  width: 200px;
+  background-size: cover;
+}
+
+.smallCard:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 2;
+}
+
+.smallCard a {
+  z-index: 3;
+  color: white;
+  margin: auto 0 0 auto;
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  right: 0;
+  bottom: 0;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.smallCard a:hover {
+  text-shadow: 6px 6px 12px black;
+}
+
+
+.active {
+  box-shadow: "6px 6px 12px black";
+  border: 2px solid yellow !important;
+}
+
+.deleteIcon{
+  width: 20px !important;
+  color: red;
+  font-size: 16px;
 }

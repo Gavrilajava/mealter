@@ -35,7 +35,7 @@ const Header = (props) => {
     if (props.user){
       return (
       <div className= "user-info">
-        <a href="/logout" onClick={props.logOut}>{props.user.name}</a>
+        <p className="navlinks-right"  onClick={props.logOut}>{props.user.name}</p>
           {avatar()} 
       </div>
       )

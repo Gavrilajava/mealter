@@ -46,6 +46,8 @@ const SignUpForm = (props) => {
       .then(userInfo => {
         if (userInfo.token){
           props.logIn(userInfo)
+          let content = document.querySelector("div.centered")
+          content.className = "centered"
           props.setShowForm(false)
         }
       })
@@ -56,7 +58,7 @@ const SignUpForm = (props) => {
     <div onClick = {closeForm} className = "blured-background">
       <div className = "auth-bgrnd signup  anim-600">
         <form onSubmit = {signUp} className = "authentication-form signup">
-          <h3>Hello, please sign up:</h3>
+          <h3>Hello and welcome!</h3>
           <label for="name">User image (can be omitted):</label>
           <ImageUploader
                   className = "image-uploader"

@@ -46,7 +46,7 @@ const Grocery = () => {
   }
 
   return(
-    <div>
+    <div className="centered">
       <h1 className ="bigtext">
         This is Grocery Page
       </h1>

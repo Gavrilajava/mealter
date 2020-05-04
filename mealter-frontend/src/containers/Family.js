@@ -4,7 +4,7 @@ import FamilyBrowser from '../components/FamilyBrowser'
 
 const Family = () => {
   return(
-    <div>
+    <div className="centered">
       {disclaimer()}
       <FamilyBrowser/>
     </div>
@@ -13,9 +13,11 @@ const Family = () => {
 
 const disclaimer = () => {
   return (
-    <div>
-      <h1 className ="bigtext">This is Family Page</h1>
-      <p>On this page you can see, edit and create your family. All ingredients calculations depends on your family size</p>
+    <div >
+      <h1 className ="title">This is your family</h1>
+      {localStorage.username 
+      ? <p></p>
+      : <p>If you sign up, you can add your family here</p>}
     </div>
   )
 }

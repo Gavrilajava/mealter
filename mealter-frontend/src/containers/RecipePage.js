@@ -56,7 +56,7 @@ const RecipePage = (props) => {
 
   if (recipe){
     return(
-      <div>
+      <div className="centered">
         <h1 className ="bigtext">
           {recipe.name}
         </h1>

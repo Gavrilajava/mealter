@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import FamilyMember from './FamilyMember'
-import {connect} from 'react-redux'
 import {backEndUrl} from '../constants'
 
 const FamilyBrowser = (props) => {
@@ -52,7 +51,7 @@ const FamilyBrowser = (props) => {
     return(
       <div className = "container">
         <div onClick = {addMember} className =  "btnHolder">
-        <i class="far fa-plus-square"></i>
+        <i className="far fa-plus-square"></i>
         </div>
       </div>
     )
@@ -61,7 +60,7 @@ const FamilyBrowser = (props) => {
 
   return(
     <div className = "browser">
-      {family.map((member) => <FamilyMember family={family} editFamily = {setFamily} member_id = {member.id}/>)}
+      {family.map((member) => <FamilyMember key = {member.id} family={family} editFamily = {setFamily} member_id = {member.id}/>)}
       {addButton()}
     </div>
   )
