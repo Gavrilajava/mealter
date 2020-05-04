@@ -292,7 +292,7 @@ nav .start-about, a:nth-child(6):hover~.animation {
   margin: 2px;
 }
 
-.authentication-form button{
+ button{
   font-size: 15px !important;
   height: 40px;
   color: white !important;
@@ -303,7 +303,7 @@ nav .start-about, a:nth-child(6):hover~.animation {
   transition: background-color .5s ease 0s !important
 }
 
-.authentication-form button:hover{
+button:hover{
   background-color: #1abc9c !important;
   transition: background-color .5s ease 0s !important
 }
@@ -419,12 +419,7 @@ img {
   padding: 1em 2em;
 }
 
-.recipeImage {
-  display: inline-block;
-  position: relative;
-  width: 400px;
-  margin: 3em;
-}
+
 
 .bigtext{
   margin: 0.5em 2em;
@@ -777,6 +772,9 @@ th, td {
   opacity: 1;
 }
 
+
+/* Schedule */
+
 .schedule{
   margin: 0px 30px;
   border: 2px solid black;
@@ -835,8 +833,7 @@ th, td {
   color: white;
   margin: auto 0 0 auto;
   position: absolute;
-  /* top: 0;
-  left: 0; */
+  width: 180px;
   right: 0;
   bottom: 0;
   text-decoration: none;
@@ -850,7 +847,7 @@ th, td {
 
 
 .active {
-  box-shadow: "6px 6px 12px black";
+  box-shadow: 6px 6px 12px black;
   border: 2px solid yellow !important;
 }
 
@@ -858,4 +855,125 @@ th, td {
   width: 20px !important;
   color: red;
   font-size: 16px;
+}
+
+/* Grocery List */
+
+.grocery{
+  margin: 0 20px;
+  background-image: url('/images/grocery.jpg');
+  background-size: cover;
+  width: 100%;
+}
+
+.groceryItem{
+  margin: 15px;
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-color: darkgoldenrod;
+  border-radius: 8px;
+  box-shadow: 6px 6px 12px black;
+  transition: box-shadow 0.1s cubic-bezier(0, 0, 1, 1);
+  /* animation: appear-grocery 1s; */
+}
+
+.groceryItem:hover{
+  box-shadow: 12px 12px 24px black;
+}
+
+@keyframes appear-grocery {
+  0%  {width: 1px;
+      height: 1px;}
+  50% {width: 50px;
+    height: 50px;}
+  100% {width: 200px;
+    height: 200px;}
+}
+
+@keyframes font-appear-yw {
+  0%  {color: yellow;}
+  /* 90% {font-size: 1px;} */
+  100% {color: white;}
+}
+
+@keyframes font-appear-wy {
+  0%  {color: white;}
+  /* 90% {font-size: 1px;} */
+  100% {color: yellow;}
+}
+
+
+
+.groceryQuantity{
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: yellow;
+  font-size: 35px;
+  width: 200px;
+  margin: auto;
+  text-align: left;
+  text-align-last: left;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px black;
+  animation: font-appear-wy 1.2s;
+
+}
+.groceryName {
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  font-size: 35px;
+  width: 200px;
+  margin: auto;
+  text-align: right;
+  text-align-last: right;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px black;
+  transition: text-shadow 0.1s cubic-bezier(0, 0, 1, 1);
+  animation: font-appear-yw 1.2s;
+}
+
+
+/* Recipe Page  */
+
+iframe {
+
+  float: left;
+
+  margin: 10px;
+
+}
+
+.recipeImage {
+
+  position: relative;
+  float: right;
+  margin: 10px;
+  width: 400px;
+
+}
+
+.small{
+  width: 120px;
+  height: 120px;
+}
+
+.smalltext{
+  font-size: 20px;
+  width: 120px;
+}
+
+#add_to_schedule{
+  position: absolute;
+  top: 10px;
+  right: 40px
 }

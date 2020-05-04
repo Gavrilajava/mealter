@@ -27,8 +27,8 @@ class ScheduledRecipe < ApplicationRecord
       sched_recipe.recipe.recipe_ingredients.map{ |ingredient|
         {
           name: ingredient.ingredient.name,
-          quantity: ingredient.quantity * m,
-          unit: ingredient.measurment_unit.name
+          quantity: ingredient.quantity == 0? "To " : ingredient.quantity * m,
+          unit: ingredient.quantity == 0? "Your taste " : ingredient.measurment_unit.name
         }
       }
     }.flatten.reduce({}){|result, ingredient|

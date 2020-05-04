@@ -40,10 +40,16 @@ const RecipePage = (props) => {
 
   const renderIng = (ing) => {
     return (
-      <li className="ingredient listItem"> 
-        <img className = "ingIcon" src = {ing.picture} alt = {ing.description}></img>
-        {`${ing.name} - ${ing.quantity} ${ing.unit}`}
-      </li>
+      <div className = "groceryItem small" style={{backgroundImage: `url(${ing.picture})`}}>
+        <p className = "groceryName smalltext">{ing.name}</p>
+        <p className = "groceryQuantity smalltext">{`${ing.quantity} ${ing.unit}`}</p>
+
+      </div>
+
+      // <li className="ingredient listItem"> 
+      //   <img className = "ingIcon" src = {ing.picture} alt = {ing.description}></img>
+      //   {`${ing.name} - ${ing.quantity} ${ing.unit}`}
+      // </li>
     )
   }
 
@@ -57,13 +63,22 @@ const RecipePage = (props) => {
   if (recipe){
     return(
       <div className="centered">
-        <h1 className ="bigtext">
+        <h1 className ="title">
           {recipe.name}
         </h1>
-        <button onClick = {() => AddToSchedule(props.match.params.id)} >Add to Schedule</button>
-        <img className = "recipeImage" src = {recipe.picture} alt = {recipe.name}></img>
-        <ul className="grocerylist">{recipe.ingredients.map(ing => renderIng(ing))}</ul>
-        <iframe width="560" height="315" src={toEmbed(recipe.video)} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <button id = "add_to_schedule" onClick = {() => AddToSchedule(props.match.params.id)} >Add to Schedule</button>
+        <iframe 
+          width="853" 
+          height="505" 
+          src={toEmbed(recipe.video)} 
+          frameborder="0" 
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+        
+        {/* <img className = "recipeImage" src = {recipe.picture} alt = {recipe.name}></img> */}
+        {recipe.ingredients.map(ing => renderIng(ing))}
+
         <ol className="recipedesctiption">{recipe.instructions.split(". ").map(step => renderStep(step))}</ol>
       </div>
     )

@@ -74,7 +74,6 @@ const Schedule = () => {
   
 
   const renderRecipe = (recipe) => {
-    debugger
     let className
     let style
     if (recipe.id == activeRecipe){

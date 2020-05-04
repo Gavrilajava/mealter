@@ -29,11 +29,22 @@ const Grocery = () => {
     return undefined
   }
 
+  String.prototype.replaceAll = function(str1, str2, ignore) 
+  {
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+  } 
+
   const displayItem = (item) => {
     return (
-      <li onClick = {checkItem} className="listItem checklist">
-        {item+" - " + Object.keys(grocery[item]).map(unit => `${grocery[item][unit]} ${unit}`).join(" + ")}
-      </li>
+      <div className = "groceryItem" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + item.replaceAll(" ", "%20") + '.png)'}}>
+        {/* {item+" - " + Object.keys(grocery[item]).map(unit => `${grocery[item][unit]} ${unit}`).join(" + ")} */}
+        <p className = "groceryName">{item}</p>
+        <p className = "groceryQuantity">{Object.keys(grocery[item]).map(unit => `${grocery[item][unit]} ${unit}`).join(" + ")}</p>
+        
+      </div>
+      // <li onClick = {checkItem} className="listItem checklist">
+      //   {item+" - " + Object.keys(grocery[item]).map(unit => `${grocery[item][unit]} ${unit}`).join(" + ")}
+      // </li>
     )
   }
 
@@ -47,12 +58,15 @@ const Grocery = () => {
 
   return(
     <div className="centered">
-      <h1 className ="bigtext">
-        This is Grocery Page
+      <h1 className ="title">
+        And Finally, the Grocery List:
       </h1>
-      <ul>
-        {Object.keys(grocery).length === 0 ? noGroceryDisclaimer() : Object.keys(grocery).map(key => displayItem(key))}
-      </ul>
+      <div className = "grocery">
+       {Object.keys(grocery).length === 0 ? noGroceryDisclaimer() : Object.keys(grocery).map(key => displayItem(key))}
+      </div>
+      {/* <ul>
+       
+      </ul> */}
     </div>
   )
 }
