@@ -39,7 +39,11 @@ class Recipe < ApplicationRecord
 
 
 
-
+  def self.changeMins
+    Recipe.all.each { |recipe|
+      recipe.update(instructions: recipe.instructions.gsub(" mins ", " minutes "))
+    }
+  end
 
 
   
