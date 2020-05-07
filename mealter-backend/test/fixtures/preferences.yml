@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  family_member_id: 1
+  positive: false
+  label_if: 1
+  label_type: MyString
+
+two:
+  family_member_id: 1
+  positive: false
+  label_if: 1
+  label_type: MyString

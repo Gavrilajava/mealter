@@ -1,6 +1,21 @@
 class FamilyMember < ApplicationRecord
   belongs_to :user
   has_one_attached :avatar
+  has_many :preferences
+  has_many :tags, through: :preferences, source: :label, source_type: "Tag"
+  has_many :categories, through: :preferences, source: :label, source_type: "Category"
+
+
+  
+  
+
+  def positive_preferences
+    self.tags.includes(:preferences).where(preferences: {positive: true}).pluck(:name) + self.categories.includes(:preferences).where(preferences: {positive: true}).pluck(:name)
+  end
+
+  def negative_preferences
+    self.tags.includes(:preferences).where(preferences: {positive: false}).pluck(:name) + self.categories.includes(:preferences).where(preferences: {positive: false}).pluck(:name)
+  end
 
 
   def self.init_desc

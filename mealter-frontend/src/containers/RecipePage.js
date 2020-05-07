@@ -24,7 +24,7 @@ const RecipePage = (props) => {
 
 
 
-  const timerSeconds = (step) => parseInt(step.split(" minutes")[0].split(/[^0-9]/g).pop())*60
+  const timerSeconds = (step) => parseInt(step.split(" minute")[0].split(/[^0-9]/g).pop())*60
 
   
 
@@ -43,7 +43,7 @@ const RecipePage = (props) => {
     else{
       if (index === (currentStep - 1)){
         return(
-          <button id="stepBack" onClick = {() => changeStep(index -1)}>Step back</button>
+          <button id="stepBack" onClick = {() => changeStep(index)}>Step back</button>
         )
       }
       else{

@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import FamilyMember from './FamilyMember'
 import {backEndUrl} from '../constants'
+import Tags from './Tags'
 
 const FamilyBrowser = (props) => {
 
   const [family, setFamily] = useState([])
+  const [tags, setTags] = useState([])
+  const [showTags, changeShowTags] = useState(false)
+  const [activeTag, setActiveTag] = useState(false)
 
   useEffect(() => {
     if (localStorage.token){
@@ -13,7 +17,10 @@ const FamilyBrowser = (props) => {
         headers:{Authorization: `Bearer ${localStorage.token}`}
       })
         .then(resp => resp.ok ? resp.json() : throwError(resp.status))
-        .then(backend => setFamily(backend.family))
+        .then(backend => {
+          setTags(backend.tags)
+          setFamily(backend.family)
+        })
         .catch(console.log)
     }
     return undefined
@@ -35,7 +42,7 @@ const FamilyBrowser = (props) => {
       })
         .then(resp => resp.ok ? resp.json() : throwError(resp.status))
         .then(backend => {
-
+      
 
           setFamily(backend.family)
           
@@ -47,21 +54,13 @@ const FamilyBrowser = (props) => {
 
 
   
-  const addButton = () => {
-    return(
-      <div className = "container">
-        <div onClick = {addMember} className =  "btnHolder">
-        <i className="far fa-plus-square"></i>
-        </div>
-      </div>
-    )
-  }
 
 
   return(
     <div className = "browser">
-      {family.map((member) => <FamilyMember key = {member.id} family={family} editFamily = {setFamily} member_id = {member.id}/>)}
-      {addButton()}
+      {showTags? <Tags tags={tags} activeTag = {activeTag} setActiveTag = {setActiveTag}/> : null}
+      {family.map((member) => <FamilyMember key = {member.id} family={family} editFamily = {setFamily} member_id = {member.id} showTags ={showTags} changeShowTags = {changeShowTags} activeTag = {activeTag}/>)}
+      <button id ="addMember" onClick = {addMember} >Add Member</button>
     </div>
   )
 }

@@ -73,10 +73,43 @@ const FamilyMember = (props) => {
     return undefined
   }
 
+  const handlePrioritiesClick = (e) => {
+    if (props.activeTag && e.target.className.includes("tags")){
+      changeState({
+        name: "tags",
+        value: {
+          action: "add",
+          tag: props.activeTag,
+          direction: e.target.className
+        }}
+      )
+      let newTag = document.createElement("label")
+      newTag.className = "tag"
+      newTag.innerText = props.activeTag
+      e.target.appendChild(newTag)
+    }
+    else{
+      props.changeShowTags(!props.showTags)
+    }
+  }
+
+  const handleDelete = (e) => {
+    debugger
+    changeState({
+      name: "tags",
+      value: {
+        action: "remove",
+        tag: e.target.parentNode.id,
+        direction: e.target.parentNode.className
+      }}
+    )
+    e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+  }
+
+
   return(
     <div  className = "food">
       <div  className="cover" style={{backgroundImage: 'url(' + createUrl(member.userpic) + ')'}}> 
-          {/* // onClick = {() => changePicture(member)} */}
         <div onClick = {deleteMember} className = "fmIcom fmDelete"><i class="far fa-trash-alt"></i></div>
         <div onClick = {() => changePicture(member)} className = "fmIcom fmChange"><i className="fas fa-arrow-right"></i></div>
         <Editable 
@@ -86,7 +119,6 @@ const FamilyMember = (props) => {
           className="recipe-title" 
           fontSize = {fontSizeFromTitle(member.name)}
         /> 
-
       </div>
       <div className = "description">
         <Editable 
@@ -95,6 +127,24 @@ const FamilyMember = (props) => {
           changeState={changeState} 
           className="memberDescription"
         />
+      </div>
+      <div className = "memberTagsContainer" onClick = {handlePrioritiesClick}>
+        <div className = "tagsPositive" >
+          <label>Like</label>
+          {member.preferences.positive.map(tag => 
+          <label id = {tag} className="tag">
+            {tag}
+            <i onClick = {handleDelete} class="fas fa-times dl"></i>
+          </label>)}
+        </div>
+        <div className = "tagsNegative" >
+          <label>Don't Like</label>
+          {member.preferences.negative.map(tag => 
+          <label id = {tag} className="tag">
+            {tag}
+            <i onClick = {handleDelete} class="fas fa-times dl"></i>
+          </label>)}
+        </div>
       </div>
     </div>
   )

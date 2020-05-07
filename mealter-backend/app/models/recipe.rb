@@ -11,6 +11,11 @@ class Recipe < ApplicationRecord
     }
   end
 
+  def relevance(preferences)
+    p = self.tags.pluck(:name)
+    p.length - (p - preferences).length
+  end
+
   def to_index
     {
       id: self.id,
@@ -37,11 +42,18 @@ class Recipe < ApplicationRecord
     }
   end
 
+  def self.tags 
+    Tag.all.pluck(:name) + Area.all.pluck(:name)
+  end
 
 
-  def self.changeMins
+
+
+  def self.changeRecipes
     Recipe.all.each { |recipe|
-      recipe.update(instructions: recipe.instructions.gsub(" mins ", " minutes "))
+      cat = Category.find_or_create_by(name: recipe.category)
+      area = Area.find_or_create_by(name: recipe.area)
+      recipe.update(category_id: cat.id, area_id: area.id)
     }
   end
 

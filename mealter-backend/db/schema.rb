@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_181703) do
+ActiveRecord::Schema.define(version: 2020_05_06_180515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 2020_04_28_181703) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "icon"
+    t.string "color"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "family_members", force: :cascade do |t|
     t.string "name"
     t.string "userpic"
@@ -59,6 +73,16 @@ ActiveRecord::Schema.define(version: 2020_04_28_181703) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "preferences", force: :cascade do |t|
+    t.integer "family_member_id"
+    t.boolean "positive"
+    t.string "label_type"
+    t.bigint "label_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["label_type", "label_id"], name: "index_preferences_on_label_type_and_label_id"
+  end
+
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer "recipe_id"
     t.integer "ingredient_id"
@@ -78,6 +102,8 @@ ActiveRecord::Schema.define(version: 2020_04_28_181703) do
     t.string "video"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "area_id"
+    t.integer "category_id"
   end
 
   create_table "scheduled_recipes", force: :cascade do |t|

@@ -31,7 +31,7 @@ const Timer = (props) => {
         return `${mins}:${seconds}`
       }
       else {
-        return <p style={{color: "green"}}>Done!</p>
+        return <p className= "done">Done!</p>
       }
     }
     else{

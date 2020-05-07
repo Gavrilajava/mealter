@@ -4,7 +4,12 @@ class Api::V1::RecipesController < ApplicationController
 
 
   def index
-    render json: Recipe.relevant
+    if request.headers["user"]
+      user = User.find_by(name: request.headers["user"])
+      render json: user.relevant_recipes
+    else
+      render json: Recipe.relevant
+    end
   end
 
   def show
