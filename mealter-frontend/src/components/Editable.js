@@ -43,7 +43,7 @@ const Editable = (props) => {
   )
 }
 
-{/* <textarea name="text" rows="14" cols="10" wrap="soft"> </textarea> */}
+
 
 
 

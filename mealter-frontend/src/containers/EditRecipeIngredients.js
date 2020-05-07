@@ -57,13 +57,12 @@ const EditRecipeIngredients = () => {
             <td>{ingred.ingredient}</td>
             <td ><input id = {ingred.id + "value"} placeholder ={ingred.quantity}></input></td>
             <td id = {ingred.id + "recipe"}>
-              <a href = {`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ingred.recipe_id}`} target="_blank" >{ingred.recipe_id}</a>
+              <a href = {`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ingred.recipe_id}`} target="_blank" rel="noopener noreferrer" >{ingred.recipe_id}</a>
             </td>
             <td>
               <select id = {ingred.id + "unit"}>
                 {allUnits().map(u => <option selected={u === ingred.unit ? "selected" : null} value={u}>{u}</option>)}
               </select>
-              {/* value = {ingred.unit} */}
             </td>
             <td><button onClick = {() => editElement(ingred.id)}>Edit</button></td>
         </tr>

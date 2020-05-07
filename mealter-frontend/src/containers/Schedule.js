@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {backEndUrl} from '../constants'
 
 const Schedule = () => {
@@ -16,7 +16,7 @@ const Schedule = () => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            ...recipes.find(recipe => recipe.id == activeRecipe),
+            ...recipes.find(recipe => recipe.id === activeRecipe),
             date: new Date(Date.parse(e.target.id)).toString()
           })
         })
@@ -25,7 +25,7 @@ const Schedule = () => {
       }
       changeRecipes([
         ...recipes.filter(recipe => recipe.id !== activeRecipe),
-        {...recipes.find(recipe => recipe.id == activeRecipe),
+        {...recipes.find(recipe => recipe.id === activeRecipe),
           date: new Date(Date.parse(e.target.id)).toString()
         }]
       )
@@ -68,7 +68,7 @@ const Schedule = () => {
       setActive(false)
     }
     else(
-      setActive(e.target.id)
+      setActive(parseInt(e.target.id))
     )
   }
   
@@ -76,7 +76,7 @@ const Schedule = () => {
   const renderRecipe = (recipe) => {
     let className
     let style
-    if (recipe.id == activeRecipe){
+    if (recipe.id === activeRecipe){
       className = "smallCard active"
       style= {boxShadow: "6px 6px 12px black", backgroundImage: 'url(' + recipe.picture + ')'}
     }
@@ -92,7 +92,7 @@ const Schedule = () => {
         style = {style}
         >
         <a href = {`/recipes/${recipe.recipe_id}`} id = {recipe.id} >{recipe.name}</a>
-        <div onClick = {deleteRecipe} className = "fmIcom fmDelete deleteIcon"><i class="far fa-trash-alt"></i></div>
+        <div onClick = {deleteRecipe} className = "fmIcom fmDelete deleteIcon"><i className="far fa-trash-alt"></i></div>
       </div>
     )
   }

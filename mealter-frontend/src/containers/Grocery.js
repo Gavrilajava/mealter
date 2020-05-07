@@ -22,6 +22,7 @@ const Grocery = () => {
 
   const checkItem = (e) => {
     if (localStorage.token){
+      // e.target.className = "groceryItem flyAway"
       fetch(`${backEndUrl}/api/v1/grocery`,{
         method: "POST",
         headers:{
@@ -56,14 +57,12 @@ const Grocery = () => {
     }
   }
 
-  String.prototype.replaceAll = function(str1, str2, ignore) 
-  {
-    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-  } 
+  const replaceAll = (string, str1, str2) => string.split(str1).join(str2)
+
 
   const displayItem = (item) => {
     return (
-      <div id = {item} onClick = {checkItem} className = "groceryItem" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + item.replaceAll(" ", "%20") + '.png)'}}>
+      <div id = {item} onClick = {checkItem} className = "groceryItem" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + replaceAll(item, " ", "%20") + '.png)'}}>
         <p id = {item} className = "groceryName">{item}</p>
         <p id = {item} className = "groceryQuantity">{Object.keys(grocery.shopping_list[item]).map(unit => `${grocery.shopping_list[item][unit]} ${unit}`).join(" + ")}</p>
       </div>
@@ -72,7 +71,7 @@ const Grocery = () => {
 
   const displayBought = (item) => {
     return (
-      <div onClick = {uncheckItem} key = {item}  id = {item} className = "groceryItem small" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + item.replaceAll(" ", "%20") + '.png)'}}>
+      <div onClick = {uncheckItem} key = {item}  id = {item} className = "groceryItem small" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + replaceAll(item, " ", "%20") + '.png)'}}>
         <p id = {item} className = "groceryName smalltext">{item}</p>
         <p id = {item} className = "groceryQuantity smalltext">{Object.keys(grocery.stock[item]).map(unit => `${grocery.stock[item][unit]} ${unit}`).join(" + ")}</p>
       </div>

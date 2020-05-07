@@ -1,6 +1,5 @@
 import React from 'react'
 import {backEndUrl} from '../constants'
-import {connect} from 'react-redux'
 import Editable from './Editable'
 import fontSizeFromTitle from './fontSizeFromTitle'
 

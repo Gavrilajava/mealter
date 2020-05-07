@@ -20,7 +20,7 @@ const RecipePage = (props) => {
       .then(backend => changeRecipe(backend))
       .catch(console.log)
     return undefined
-  }, [])
+  }, [props.match.params.id])
 
 
 
@@ -94,7 +94,8 @@ const RecipePage = (props) => {
         </h1>
         <button id = "add_to_schedule" onClick = {() => AddToSchedule(props.match.params.id)} >Add to Schedule</button>
         <button id = "change_view" onClick = {() => changeShow(!showSteps)}>{showSteps?"Show Ingredients":"Show steps"}</button>
-        <iframe 
+        <iframe
+          title = {`${recipe.name} Youtube video`} 
           width="853" 
           height="505" 
           src={toEmbed(recipe.video)} 

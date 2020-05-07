@@ -10,16 +10,13 @@ const Recipes = () => {
     const [filter, changeFilter] = useState("")
   
     useEffect(() => {
-      // if (localStorage.token){
         fetch(`${backEndUrl}/api/v1/recipes`,{
           method: "GET",
-          // headers:{Authorization: `Bearer ${localStorage.token}`}
           headers:{user: localStorage.username}
         })
           .then(resp => resp.ok ? resp.json() : throwError(resp.status))
           .then(backend => changeRecipes(backend))
           .catch(console.log)
-      // }
       return undefined
     }, [])
   

@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def relevant_recipes
-    prefs = negative_preferences
+    prefs = positive_preferences
     Recipe.all.includes(:tags).where.not(tags: {name: self.negative_preferences}).sort{ |a, b|
       a.relevance(prefs) <=> b.relevance(prefs)
     }.map{ |recipe|

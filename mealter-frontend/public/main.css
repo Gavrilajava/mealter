@@ -613,6 +613,7 @@ th, td {
   text-decoration: none;
   text-align: center;
   border-radius: 0 0 0 2px;
+  margin: 0;
 }
 
 .food > .info > .recipe:hover { background: #9967B9 }
@@ -940,6 +941,30 @@ th, td {
   /* animation: appear-grocery 1s; */
 }
 
+.flyAway{
+  margin-top: 6500px;
+  animation: fall-down 1s
+}
+
+@keyframes fall-down{
+  0% {
+    margin-top: 15px;
+  }
+  10% {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    display: block;
+    top: 500px ;
+    left: 1000px
+  }
+
+  100%{
+    position: absolute;
+    top: 6500px;
+  }
+}
+
 .groceryItem:hover{
   box-shadow: 12px 12px 24px black;
 }
@@ -1104,4 +1129,34 @@ iframe {
   font-size: 24px;
   text-shadow: 2px 2px 4px black;
   box-shadow: 2px 2px 4px black;
+}
+
+.lamb{
+  background-image: url('/images/sheep.svg');
+  color: white;
+  width: 22px;
+  height: 22px
+}
+
+.pasta{
+  background-image: url('/images/pasta.svg');
+  color: white;
+  width: 22px;
+  height: 22px
+}
+
+.goat{
+  background-image: url('/images/goat.svg');
+  background-size: cover;
+  color: white;
+  width: 22px;
+  height: 22px
+}
+
+.pork{
+  background-image: url('/images/pig.svg');
+  background-size: cover;
+  color: white;
+  width: 22px;
+  height: 22px
 }
