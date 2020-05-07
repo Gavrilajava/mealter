@@ -2,6 +2,7 @@ class Ingredient < ApplicationRecord
   has_many :recipe_ingredients
   has_many :recipes, through: :recipe_ingredients
   
+  
 
   def self.get
     url = "https://www.themealdb.com/api/json/v2/9973533/list.php?i=list"

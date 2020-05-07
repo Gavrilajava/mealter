@@ -2,6 +2,7 @@ class RecipeIngredient < ApplicationRecord
   belongs_to :recipe
   belongs_to :ingredient
   belongs_to :measurment_unit
+  has_many :stocks
 
   def to_frontend
     {

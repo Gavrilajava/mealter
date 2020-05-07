@@ -5,6 +5,7 @@ const Grocery = () => {
 
   const [grocery, setGrocery] = useState({})
 
+
   useEffect(() => {
     if (localStorage.token){
       fetch(`${backEndUrl}/api/v1/grocery`,{
@@ -20,13 +21,39 @@ const Grocery = () => {
 
 
   const checkItem = (e) => {
-    if (e.target.className === "listItem checklist"){
-      e.target.className = "listItem doneStep"
+    if (localStorage.token){
+      fetch(`${backEndUrl}/api/v1/grocery`,{
+        method: "POST",
+        headers:{
+          Authorization: `Bearer ${localStorage.token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ingredient: e.target.id
+        })
+      })
+        .then(resp => resp.ok ? resp.json() : throwError(resp.status))
+        .then(backend => setGrocery(backend))
+        .catch(console.log)
     }
-    else {
-      e.target.className = "listItem checklist"
+  }
+
+  const uncheckItem = (e) => {
+    if (localStorage.token){
+      fetch(`${backEndUrl}/api/v1/grocery`,{
+        method: "DELETE",
+        headers:{
+          Authorization: `Bearer ${localStorage.token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ingredient: e.target.id
+        })
+      })
+        .then(resp => resp.ok ? resp.json() : throwError(resp.status))
+        .then(backend => setGrocery(backend))
+        .catch(console.log)
     }
-    return undefined
   }
 
   String.prototype.replaceAll = function(str1, str2, ignore) 
@@ -36,15 +63,19 @@ const Grocery = () => {
 
   const displayItem = (item) => {
     return (
-      <div className = "groceryItem" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + item.replaceAll(" ", "%20") + '.png)'}}>
-        {/* {item+" - " + Object.keys(grocery[item]).map(unit => `${grocery[item][unit]} ${unit}`).join(" + ")} */}
-        <p className = "groceryName">{item}</p>
-        <p className = "groceryQuantity">{Object.keys(grocery[item]).map(unit => `${grocery[item][unit]} ${unit}`).join(" + ")}</p>
-        
+      <div id = {item} onClick = {checkItem} className = "groceryItem" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + item.replaceAll(" ", "%20") + '.png)'}}>
+        <p id = {item} className = "groceryName">{item}</p>
+        <p id = {item} className = "groceryQuantity">{Object.keys(grocery.shopping_list[item]).map(unit => `${grocery.shopping_list[item][unit]} ${unit}`).join(" + ")}</p>
       </div>
-      // <li onClick = {checkItem} className="listItem checklist">
-      //   {item+" - " + Object.keys(grocery[item]).map(unit => `${grocery[item][unit]} ${unit}`).join(" + ")}
-      // </li>
+    )
+  }
+
+  const displayBought = (item) => {
+    return (
+      <div onClick = {uncheckItem} key = {item}  id = {item} className = "groceryItem small" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + item.replaceAll(" ", "%20") + '.png)'}}>
+        <p id = {item} className = "groceryName smalltext">{item}</p>
+        <p id = {item} className = "groceryQuantity smalltext">{Object.keys(grocery.stock[item]).map(unit => `${grocery.stock[item][unit]} ${unit}`).join(" + ")}</p>
+      </div>
     )
   }
 
@@ -56,17 +87,23 @@ const Grocery = () => {
     )
   }
 
+
+
   return(
     <div className="centered">
       <h1 className ="title">
         And Finally, the Grocery List:
       </h1>
       <div className = "grocery">
-       {Object.keys(grocery).length === 0 ? noGroceryDisclaimer() : Object.keys(grocery).map(key => displayItem(key))}
+       {Object.keys(grocery).length === 0 ? noGroceryDisclaimer() : Object.keys(grocery.shopping_list).map(key => displayItem(key))}
       </div>
-      {/* <ul>
-       
-      </ul> */}
+      <h1 className ="title">
+        This items you already have:
+      </h1>
+      <div className = "grocery">
+       {Object.keys(grocery).length === 0 ? noGroceryDisclaimer() : Object.keys(grocery.stock).map(key => displayBought(key))}
+      </div>
+
     </div>
   )
 }

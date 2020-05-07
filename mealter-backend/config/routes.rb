@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       delete '/scheduled/:id', to: "schedule#delete"
 
       get '/grocery', to: "schedule#grocery"
+      post '/grocery', to: "schedule#add_stock"
+      delete '/grocery', to: "schedule#delete_stock"
 
 
     end
