@@ -58,6 +58,7 @@ const FamilyMember = (props) => {
   }
 
   const changePicture = () => {
+    debugger
     if (document.querySelectorAll('textarea').length ===0){
       if (member.userpic[0] !== '/'){
         let newPic

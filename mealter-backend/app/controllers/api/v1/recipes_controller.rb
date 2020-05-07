@@ -4,7 +4,7 @@ class Api::V1::RecipesController < ApplicationController
 
 
   def index
-    if request.headers["user"]
+    if request.headers["user"] != "undefined"
       user = User.find_by(name: request.headers["user"])
       render json: user.relevant_recipes
     else
