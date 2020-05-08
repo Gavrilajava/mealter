@@ -22,7 +22,7 @@ const Tags = (props) => {
 
   return (
     <div className = "tagContainer">
-      {props.tags.map(tag => <label onClick = {() => toggleClick(tag)} className= {tagClass(tag)}>{tag}</label>)}
+      {props.tags.map(tag => <label key={`tag ${tag}`} onClick = {() => toggleClick(tag)} className= {tagClass(tag)}>{tag}</label>)}
     </div>
   )
 }

@@ -14,6 +14,8 @@ const FamilyMember = (props) => {
     }
     props.editFamily(props.family.filter(m => m.id !== props.member_id).concat(new_member).sort((a,b) => a.id - b.id))
     if (localStorage.token){
+      console.log(new_member)
+      console.log(obj)
       fetch(`${backEndUrl}/api/v1/family`,{
         method: "PATCH",
         headers:{
@@ -68,6 +70,7 @@ const FamilyMember = (props) => {
           newPic = 'family' + (parseInt(member.userpic.slice(-1))+1)
         }
         changeState({name: "userpic", value: newPic})
+        
       }
     }
     return undefined
@@ -83,6 +86,7 @@ const FamilyMember = (props) => {
           direction: e.target.className
         }}
       )
+
       let newTag = document.createElement("label")
       newTag.className = "tag"
       newTag.innerText = props.activeTag
@@ -110,7 +114,7 @@ const FamilyMember = (props) => {
   return(
     <div  className = "food">
       <div  className="cover" style={{backgroundImage: 'url(' + createUrl(member.userpic) + ')'}}> 
-        <div onClick = {deleteMember} className = "fmIcom fmDelete"><i class="far fa-trash-alt"></i></div>
+        <div onClick = {deleteMember} className = "fmIcom fmDelete"><i className="far fa-trash-alt"></i></div>
         <div onClick = {() => changePicture(member)} className = "fmIcom fmChange"><i className="fas fa-arrow-right"></i></div>
         <Editable 
           value = {member.name} 
@@ -132,17 +136,17 @@ const FamilyMember = (props) => {
         <div className = "tagsPositive" >
           <label>Like</label>
           {member.preferences.positive.map(tag => 
-          <label id = {tag} className="tag">
+          <label key = {member.name + " " + tag} id = {tag} className="tag">
             {tag}
-            <i onClick = {handleDelete} class="fas fa-times dl"></i>
+            <i onClick = {handleDelete} className="fas fa-times dl"></i>
           </label>)}
         </div>
         <div className = "tagsNegative" >
           <label>Don't Like</label>
           {member.preferences.negative.map(tag => 
-          <label id = {tag} className="tag">
+          <label key = {member.name + " " + tag} id = {tag} className="tag">
             {tag}
-            <i onClick = {handleDelete} class="fas fa-times dl"></i>
+            <i onClick = {handleDelete} className="fas fa-times dl"></i>
           </label>)}
         </div>
       </div>
