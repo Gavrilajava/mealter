@@ -5,7 +5,7 @@ The web app to organize recipes and make a grocery list out of it. This project 
 
 ## Built With
 
-* [Ruby](https://www.ruby-lang.org/ - Languge used to write backend
+* [Ruby](https://www.ruby-lang.org/) - Languge used to write backend
 * [Rails](https://rubyonrails.org/) - Backend framework
 * [React](https://reactjs.org/) - Library used to build front-end
 * [Redux](https://redux.js.org/) - Used mainly just to try it, it is not that kind of project that require Redux
