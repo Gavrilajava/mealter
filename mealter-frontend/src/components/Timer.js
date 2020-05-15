@@ -1,10 +1,10 @@
 import React, {useState, useEffect}  from 'react'
 
 
-const Timer = (props) => {
+const Timer = ({time}) => {
 
   const [active, setActive] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(props.time)
+  const [timeLeft, setTimeLeft] = useState(time)
   
 
   const start = () => setActive(true)

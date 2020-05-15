@@ -3,9 +3,9 @@ import LogInForm from '../../components/LogInForm';
 import SignUpForm from '../../components/SignUpForm'
 import {connect} from 'react-redux'
 import {backEndUrl} from '../../constants'
-import { useLocation } from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 
-const Header = (props) => {
+const Header = ({user, addAvatar, logOut}) => {
   let location = useLocation()
   let pointer = location.pathname.split('/')
   !pointer[1]? pointer = "home" : pointer = pointer[1]
@@ -13,8 +13,8 @@ const Header = (props) => {
   const [showForm, setShowForm] = useState(false)
   
   const avatar = () => {
-    if (props.user.avatar){
-      return <img alt ="avatar" className="avatar" src = {`${backEndUrl}${props.user.avatar}`} />
+    if (user.avatar){
+      return <img alt ="avatar" className="avatar" src = {`${backEndUrl}${user.avatar}`} />
     }
     else{
       fetch(`${backEndUrl}/user/avatar`,{
@@ -24,7 +24,7 @@ const Header = (props) => {
         }
       })
         .then(resp => resp.json())
-        .then(avatar => props.addAvatar(avatar.link))
+        .then(avatar => addAvatar(avatar.link))
       return null
     }
   }
@@ -32,10 +32,10 @@ const Header = (props) => {
   
 
   const userData = () => {
-    if (props.user){
+    if (user){
       return (
       <div className= "user-info">
-        <p className="navlinks-right"  onClick={props.logOut}>{props.user.name}</p>
+        <p className="navlinks-right"  onClick={logOut}>{user.name}</p>
           {avatar()} 
       </div>
       )

@@ -3,9 +3,9 @@ import {backEndUrl} from '../constants'
 import {connect} from 'react-redux'
 import Editable from './Editable'
 
-const AddMember = (props) => {
+const AddMember = ({family, member_id, editFamily}) => {
 
-  let member = props.family.find(member => member.id === props.member_id)
+  let member = family.find(member => member.id === member_id)
 
   const changeState = (obj) => {
     let new_member = {
@@ -13,7 +13,7 @@ const AddMember = (props) => {
       [obj.name]: obj.value
     }
 
-    props.editFamily(props.family.filter(m => m.id !== props.member_id).concat(new_member))
+    editFamily(family.filter(m => m.id !== member_id).concat(new_member))
     if (localStorage.token){
       fetch(`${backEndUrl}/api/v1/family`,{
         method: "PATCH",

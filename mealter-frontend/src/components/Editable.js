@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 
 
 
-const Editable = (props) => {
+const Editable = ({value, changeParentState, name, fontSize, className}) => {
 
   const [state, changeState] = useState({
-    value: props.value,
+    value,
     editable: false
   })
 
@@ -24,7 +24,7 @@ const Editable = (props) => {
   }
 
   const handleOnBlur = (e) => {
-    props.changeState({name: props.name, value: e.target.value})
+    changeParentState({name, value: e.target.value})
     changeState({
       ...state,
       editable: false
@@ -32,13 +32,13 @@ const Editable = (props) => {
   }
 
   let setFontSize
-  props.fontSize ? setFontSize = {fontSize: props.fontSize} : setFontSize = null
+  fontSize ? setFontSize = {fontSize} : setFontSize = null
 
   return(
     state.editable
 
-      ? <textarea wrap="soft" className = {props.className} style = {setFontSize} onBlur={handleOnBlur} onChange={handleChange} value = {state.value}></textarea>
-      : <p className = {props.className} style = {setFontSize} onClick={makeEditable} >{state.value}</p>
+      ? <textarea wrap="soft" className = {className} style = {setFontSize} onBlur={handleOnBlur} onChange={handleChange} value = {state.value}></textarea>
+      : <p className = {className} style = {setFontSize} onClick={makeEditable} >{state.value}</p>
 
   )
 }

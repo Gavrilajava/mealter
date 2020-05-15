@@ -2,23 +2,19 @@ import React from 'react'
 import AddToSchedule from '../components/AddToSchedule'
 import fontSizeFromTitle from './fontSizeFromTitle'
 
-const RecipeCard = (props) => {
-
-
-
-
+const RecipeCard = ({recipe}) => {
 
   return(
     <div className="food">
-      <div className="cover" style={{backgroundImage: 'url(' + props.recipe.picture + ')'}}>
-        <label style={{background: styleForCat(props.recipe.category).color, opacity: 0.8}}>
-        <i className={styleForCat(props.recipe.category).icon + " recipe_cat"}></i>
-          <font className="category">{props.recipe.category}</font>
+      <div className="cover" style={{backgroundImage: 'url(' + recipe.picture + ')'}}>
+        <label style={{background: styleForCat(recipe.category).color, opacity: 0.8}}>
+        <i className={styleForCat(recipe.category).icon + " recipe_cat"}></i>
+          <font className="category">{recipe.category}</font>
         </label>
-      <a href={`/recipes/${props.recipe.id}`} style={{fontSize: fontSizeFromTitle(props.recipe.name)}}  className="recipe-title">{props.recipe.name} </a>
+      <a href={`/recipes/${recipe.id}`} style={{fontSize: fontSizeFromTitle(recipe.name)}}  className="recipe-title">{recipe.name} </a>
       </div>
       <div className="info">
-        <p onClick = {() => AddToSchedule(props.recipe.id)} className="recipe" style={{background: styleForCat(props.recipe.category).color}}>
+        <p onClick = {() => AddToSchedule(recipe.id)} className="recipe" style={{background: styleForCat(recipe.category).color}}>
           <font className="recipe_promt">Add to list</font>
           <i className="fas fa-mortar-pestle go_recipe"></i>
           
@@ -28,12 +24,12 @@ const RecipeCard = (props) => {
             <tbody>
               <tr>
                 <td align="left" valign="middle" className="pad-right"><strong>Tags:</strong></td>
-                <td align="left" valign="middle">{props.recipe.tags.map(tag => tag).join(" ")}</td>
+                <td align="left" valign="middle">{recipe.tags.map(tag => tag).join(" ")}</td>
               </tr>
               <tr>
                 <td align="left" valign="middle" className="pad-right"><strong>Cuisine:</strong></td>
                 <td align="left" valign="middle" className="consumers">
-                  <span>{props.recipe.area}</span>
+                  <span>{recipe.area}</span>
                 </td>
               </tr>
             </tbody>

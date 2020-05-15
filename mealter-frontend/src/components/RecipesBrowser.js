@@ -5,8 +5,6 @@ import FilterField from './FilterField'
 
 const RecipesBrowser = () => {
 
-  // const [state, changeState] = useState({recipes: [], filter: null})
-
   const [recipes, changeRecipes] = useState([])
   const [filter, changeFilter] = useState("")
 
@@ -18,17 +16,10 @@ const RecipesBrowser = () => {
       })
         .then(resp => resp.ok ? resp.json() : throwError(resp.status))
         .then(backend => changeRecipes(backend))
-        // .then(backend => changeState({...state, recipes: backend}))
         .catch(console.log)
     }
     return undefined
   }, [])
-
-
-
-  // const changeFilter = (e) => {
-  //   changeState({...state, filter: e.target.value})
-  // }
 
   const filterRecipes = () => {
     if (filter.length === 0){
@@ -38,8 +29,6 @@ const RecipesBrowser = () => {
       return recipes.filter(r => r.name.toLowerCase().includes(filter.toLowerCase()) || r.category.toLowerCase().includes(filter.toLowerCase()) || r.tags.join("").toLowerCase().includes(filter))
     }
   }
-
-
 
   return(
     <div className= "wrapper">

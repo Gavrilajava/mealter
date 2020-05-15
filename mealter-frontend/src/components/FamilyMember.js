@@ -3,16 +3,16 @@ import {backEndUrl} from '../constants'
 import Editable from './Editable'
 import fontSizeFromTitle from './fontSizeFromTitle'
 
-const FamilyMember = (props) => {
+const FamilyMember = ({family, member_id, editFamily, activeTag, changeShowTags, showTags}) => {
 
-  let member = props.family.find(member => member.id === props.member_id)
+  let member = family.find(member => member.id === member_id)
 
   const changeState = (obj) => {
     let new_member = {
       ...member,
       [obj.name]: obj.value
     }
-    props.editFamily(props.family.filter(m => m.id !== props.member_id).concat(new_member).sort((a,b) => a.id - b.id))
+    editFamily(family.filter(m => m.id !== member_id).concat(new_member).sort((a,b) => a.id - b.id))
     if (localStorage.token){
       fetch(`${backEndUrl}/api/v1/family`,{
         method: "PATCH",
@@ -30,8 +30,8 @@ const FamilyMember = (props) => {
 
   const deleteMember = () => {
     if (document.querySelectorAll('textarea').length ===0){
-      let newFamily = props.family.filter(m => m.id !== props.member_id)
-      props.editFamily(newFamily)
+      let newFamily = family.filter(member => member.id !== member_id)
+      editFamily(newFamily)
       if (localStorage.token){
         fetch(`${backEndUrl}/api/v1/family`,{
           method: "DELETE",
@@ -39,7 +39,7 @@ const FamilyMember = (props) => {
             Authorization: `Bearer ${localStorage.token}`,
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({member: member})
+          body: JSON.stringify({member})
         })
           .then(resp => resp.ok ? resp.json() : throwError(resp.status))
           .catch(console.log)
@@ -74,22 +74,22 @@ const FamilyMember = (props) => {
   }
 
   const handlePrioritiesClick = (e) => {
-    if (props.activeTag && e.target.className.includes("tags")){
+    if (activeTag && e.target.className.includes("tags")){
       changeState({
         name: "tags",
         value: {
           action: "add",
-          tag: props.activeTag,
+          tag: activeTag,
           direction: e.target.className
         }}
       )
       let newTag = document.createElement("label")
       newTag.className = "tag"
-      newTag.innerText = props.activeTag
+      newTag.innerText = activeTag
       e.target.appendChild(newTag)
     }
     else{
-      props.changeShowTags(!props.showTags)
+      changeShowTags(!showTags)
     }
   }
 
@@ -115,7 +115,7 @@ const FamilyMember = (props) => {
         <Editable 
           value = {member.name} 
           name="name" 
-          changeState={changeState} 
+          changeParentState={changeState} 
           className="recipe-title" 
           fontSize = {fontSizeFromTitle(member.name)}
         /> 
@@ -124,7 +124,7 @@ const FamilyMember = (props) => {
         <Editable 
           value = {member.description} 
           name="description" 
-          changeState={changeState} 
+          changeParentState={changeState} 
           className="memberDescription"
         />
       </div>

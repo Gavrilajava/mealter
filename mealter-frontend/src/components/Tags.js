@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Tags = (props) => {
+const Tags = ({tags, activeTag, setActiveTag}) => {
 
   const tagClass = (tag) => {
-    if (props.activeTag === tag) {
+    if (activeTag === tag) {
       return "tag active"
     }
     else{
@@ -12,17 +12,17 @@ const Tags = (props) => {
   }
 
   const toggleClick = (tag) => {
-    if (props.activeTag === tag){
-      props.setActiveTag(false)
+    if (activeTag === tag){
+      setActiveTag(false)
     }
     else{
-      props.setActiveTag(tag)
+      setActiveTag(tag)
     }
   }
 
   return (
     <div className = "tagContainer">
-      {props.tags.map(tag => <label onClick = {() => toggleClick(tag)} className= {tagClass(tag)}>{tag}</label>)}
+      {tags.map(tag => <label onClick = {() => toggleClick(tag)} className= {tagClass(tag)}>{tag}</label>)}
     </div>
   )
 }

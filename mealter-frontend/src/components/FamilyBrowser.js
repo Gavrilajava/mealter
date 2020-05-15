@@ -3,7 +3,7 @@ import FamilyMember from './FamilyMember'
 import {backEndUrl} from '../constants'
 import Tags from './Tags'
 
-const FamilyBrowser = (props) => {
+const FamilyBrowser = () => {
 
   const [family, setFamily] = useState([])
   const [tags, setTags] = useState([])

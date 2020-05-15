@@ -1,11 +1,11 @@
 import React from 'react'
 
-const FilterField = (props) => {
+const FilterField = ({changeFilter}) => {
 
   return (
     <div className='filter-container'>
       <label className="title">Type something to filter:</label>
-      <input className = 'filter' onChange = {(e) => props.changeFilter(e.target.value.toLowerCase())}></input>
+      <input className = 'filter' onChange = {(e) => changeFilter(e.target.value.toLowerCase())}></input>
     </div>
   )
 }

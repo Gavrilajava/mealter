@@ -3,7 +3,7 @@ import {backEndUrl} from '../constants'
 import {connect} from 'react-redux'
 import ImageUploader from 'react-images-upload';
 
-const SignUpForm = (props) => {
+const SignUpForm = ({setShowForm, logIn}) => {
 
   
 
@@ -18,7 +18,7 @@ const SignUpForm = (props) => {
     if (e.target.className === 'blured-background'){
       let content = document.querySelector("div.centered")
       content.className = "centered"
-      props.setShowForm(false)
+      setShowForm(false)
     
     }
   }
@@ -45,10 +45,10 @@ const SignUpForm = (props) => {
       .then(res => res.json())
       .then(userInfo => {
         if (userInfo.token){
-          props.logIn(userInfo)
+          logIn(userInfo)
           let content = document.querySelector("div.centered")
           content.className = "centered"
-          props.setShowForm(false)
+          setShowForm(false)
         }
       })
 
