@@ -1,8 +1,11 @@
 import React from 'react'
 import AddToSchedule from '../components/AddToSchedule'
 import fontSizeFromTitle from './fontSizeFromTitle'
+// import fontSizeFromTitle from './fontSizeFromTitle'
 
 const RecipeCard = ({recipe}) => {
+
+  const replaceMinuses = title => title.split("-").join('‑')
 
   return(
     <div className="food">
@@ -11,7 +14,7 @@ const RecipeCard = ({recipe}) => {
         <i className={styleForCat(recipe.category).icon + " recipe_cat"}></i>
           <font className="category">{recipe.category}</font>
         </label>
-      <a href={`/recipes/${recipe.id}`} style={{fontSize: fontSizeFromTitle(recipe.name)}}  className="recipe-title">{recipe.name} </a>
+      <a href={`/recipes/${recipe.id}`} style={{fontSize: fontSizeFromTitle(recipe.name, 350, 350, 1.2, 16)}}  className="recipe-title">{replaceMinuses(recipe.name)} </a>
       </div>
       <div className="info">
         <p onClick = {() => AddToSchedule(recipe.id)} className="recipe" style={{background: styleForCat(recipe.category).color}}>

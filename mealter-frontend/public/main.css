@@ -548,6 +548,7 @@ th, td {
   font-size: 13px;
   text-transform: uppercase;
   color: #FFF;
+  z-index: 2;
   text-shadow: 0 1px 2px #000;
   background: rgba(136, 86, 168, .6);
 }
@@ -685,6 +686,8 @@ th, td {
   width: 350px;
   margin: auto;
   text-align: right;
+  word-break: keep-all;
+  hyphens: none;
   text-align-last: right;
   text-decoration: none;
   text-shadow: 2px 2px 4px black;
@@ -747,7 +750,7 @@ th, td {
 }
 
 .fmDelete{
-  right: 0;
+  right: -5;
   z-index: 4;
 }
 
@@ -757,12 +760,14 @@ th, td {
 
 .fmIcom{
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -20px;
+  right: -20px;
+  background-color: gray;
+  border-radius: 25px;
   width: 50px;
-  height: 50px;
+  height: 50x;
   opacity: 0;
-  font-size: 50px;
+  font-size: 15px;
   background-size: contain;
 }
 
@@ -894,11 +899,10 @@ th, td {
   color: white;
   margin: auto 0 0 auto;
   position: absolute;
-  width: 180px;
   right: 0;
   bottom: 0;
   text-decoration: none;
-  font-size: 24px;
+
   font-family: 'Roboto', sans-serif;
 }
 

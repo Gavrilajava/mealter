@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {backEndUrl} from '../constants'
+import fontSizeFromTitle from '../components/fontSizeFromTitle'
 
 const Grocery = () => {
 
@@ -63,7 +64,7 @@ const Grocery = () => {
   const displayItem = (item) => {
     return (
       <div id = {item} onClick = {checkItem} className = "groceryItem" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + replaceAll(item, " ", "%20") + '.png)'}}>
-        <p id = {item} className = "groceryName">{item}</p>
+        <p id = {item} className = "groceryName" style={{fontSize: fontSizeFromTitle(item, 60, 200, 1.2, 8)}}  >{item}</p>
         <p id = {item} className = "groceryQuantity">{Object.keys(grocery.shopping_list[item]).map(unit => `${grocery.shopping_list[item][unit]} ${unit}`).join(" + ")}</p>
       </div>
     )
@@ -72,7 +73,7 @@ const Grocery = () => {
   const displayBought = (item) => {
     return (
       <div onClick = {uncheckItem} key = {item}  id = {item} className = "groceryItem small" style={{backgroundImage: 'url(https://www.themealdb.com/images/ingredients/' + replaceAll(item, " ", "%20") + '.png)'}}>
-        <p id = {item} className = "groceryName smalltext">{item}</p>
+        <p id = {item} className = "groceryName smalltext" style={{fontSize: fontSizeFromTitle(item, 36, 120, 1.4, 8)}} >{item}</p>
         <p id = {item} className = "groceryQuantity smalltext">{Object.keys(grocery.stock[item]).map(unit => `${grocery.stock[item][unit]} ${unit}`).join(" + ")}</p>
       </div>
     )

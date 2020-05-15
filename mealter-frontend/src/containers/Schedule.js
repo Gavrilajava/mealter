@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {backEndUrl} from '../constants'
+import fontSizeFromTitle from '../components/fontSizeFromTitle'
 
 const Schedule = () => {
 
@@ -91,7 +92,13 @@ const Schedule = () => {
         className = {className} 
         style = {style}
         >
-        <a href = {`/recipes/${recipe.recipe_id}`} id = {recipe.id} >{recipe.name}</a>
+        <a
+          href = {`/recipes/${recipe.recipe_id}`} 
+          id = {recipe.id} 
+          style={{fontSize: fontSizeFromTitle(recipe.name, 50, 170, 1.25, 8)}} 
+        >
+          {recipe.name}
+        </a>
         <div onClick = {deleteRecipe} className = "fmIcom fmDelete deleteIcon"><i className="far fa-trash-alt"></i></div>
       </div>
     )
