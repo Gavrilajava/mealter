@@ -117,7 +117,7 @@ const FamilyMember = ({family, member_id, editFamily, activeTag, changeShowTags,
           name="name" 
           changeParentState={changeState} 
           className="recipe-title" 
-          fontSize = {fontSizeFromTitle(member.name)}
+          fontSize = {fontSizeFromTitle(member.name, 350, 350, 1.2, 16)}
         /> 
       </div>
       <div className = "description">
