@@ -9,6 +9,30 @@ class ScheduledRecipe < ApplicationRecord
   has_many :bought_ingredients, through: :stocks, source: :recipe_ingredient
 
 
+  def self.shopping_list(user)
+    m = user.family_members.count
+    user.scheduled_recipes.includes(:recipe_ingredients, :ingredients, :measurment_units, :stocks).map { |sched_recipe|
+      sched_recipe.groceries.map{ |ingredient|
+        {
+          name: ingredient.ingredient.name,
+          quantity: ingredient.quantity == 0? "To " : ingredient.quantity * m,
+          unit: ingredient.quantity == 0? "Your taste " : ingredient.measurment_unit.name
+        }
+      }
+    }.flatten.reduce({}){|result, ingredient|
+      if result[ingredient[:name]] 
+        if result[ingredient[:name]][ingredient[:unit]]
+          result[ingredient[:name]][ingredient[:unit]] += ingredient[:quantity]
+        else
+          result[ingredient[:name]][ingredient[:unit]] = ingredient[:quantity]
+        end
+      else
+        result[ingredient[:name]] = {ingredient[:unit] => ingredient[:quantity]}
+      end
+      result
+    }
+  end
+
   def self.to_frontend(user)
     user.scheduled_recipes.map { |sched_recipe|
       {
@@ -44,29 +68,7 @@ class ScheduledRecipe < ApplicationRecord
   end
 
 
-  def self.shopping_list(user)
-    m = user.family_members.count
-    user.scheduled_recipes.includes(:recipe_ingredients, :ingredients, :measurment_units, :stocks).map { |sched_recipe|
-      sched_recipe.groceries.map{ |ingredient|
-        {
-          name: ingredient.ingredient.name,
-          quantity: ingredient.quantity == 0? "To " : ingredient.quantity * m,
-          unit: ingredient.quantity == 0? "Your taste " : ingredient.measurment_unit.name
-        }
-      }
-    }.flatten.reduce({}){|result, ingredient|
-      if result[ingredient[:name]] 
-        if result[ingredient[:name]][ingredient[:unit]]
-          result[ingredient[:name]][ingredient[:unit]] += ingredient[:quantity]
-        else
-          result[ingredient[:name]][ingredient[:unit]] = ingredient[:quantity]
-        end
-      else
-        result[ingredient[:name]] = {ingredient[:unit] => ingredient[:quantity]}
-      end
-      result
-    }
-  end
+
 
   def self.stock(user)
     m = user.family_members.count
