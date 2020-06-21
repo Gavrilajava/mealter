@@ -117,9 +117,9 @@ GEM
     pg (1.2.3)
     pg (1.2.3-x64-mingw32)
     pg (1.2.3-x86-mingw32)
-    puma (4.3.3)
+    puma (4.3.5)
       nio4r (~> 2.0)
-    puma (4.3.3-java)
+    puma (4.3.5-java)
       nio4r (~> 2.0)
     rack (2.2.2)
     rack-cors (1.1.1)
@@ -205,11 +205,11 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-driver (0.7.1-java)
-      websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+      websocket-extensions (0.1.5)
     yaml_db (0.7.0)
       rails (>= 3.0)
       rake (>= 0.8.7)
+    
     zeitwerk (2.3.0)
 
 PLATFORMS
@@ -226,7 +226,7 @@ DEPENDENCIES
   jwt
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
-  puma (~> 4.1)
+  puma (~> 4.3)
   rack-cors
   rails (~> 6.0.2, >= 6.0.2.2)
   rest-client
